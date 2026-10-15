@@ -40,6 +40,7 @@ Batch JSON format expected:
       "id": "...",
       "text": "Paul Doumer",
       "entity_type": "SPK"
+      "entity_type": "SPK"
     }
   ],
   "parameters": {}

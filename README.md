@@ -1,142 +1,82 @@
-# Decidon
-### Prosopographical Directory of the French Third Republic
+# DECIDON — Prosopographic database of the French Third Republic
 
-Decidon is a web application providing a searchable prosopographical directory of French parliamentarians and government members under the Third Republic (1870–1940).
+A SQLite database of deputies, senators, and ministers during the French
+Third Republic (1870–1940), with collection and processing scripts and a
+search API.
 
----
+Developed for DECIDON, the resource supports research into agenda-setting
+dynamics between Parliament and the press. It provides a reference layer
+for linking person mentions in parliamentary debates and press articles
+to historical office holders.
 
-## 1. Sources
+![Data collection and database-building workflow](docs/workflow.png)
 
-### Primary sources
+## Data
 
-- [Sycomore](https://www2.assemblee-nationale.fr/sycomore/liste/) — National Assembly deputies database
-- [Senate website archive](https://www.senat.fr/senateurs-3eme-republique/senatl.html) — Third Republic senators
+Data were collected in March 2026 from three sources:
 
-### Additional sources
+| Office holders | Source |
+|---|---|
+| Deputies | [Sycomore, Assemblée nationale](https://www2.assemblee-nationale.fr/sycomore/liste/) |
+| Senators | [Sénat: senators of the Third Republic](https://www.senat.fr/senateurs-3eme-republique/senatl.html) |
+| Ministers | [French Wikipedia: list of French governments](https://fr.wikipedia.org/wiki/Liste_des_gouvernements_de_la_France) |
 
-- [Wikipedia](https://www.wikipedia.org/)
-- [Wikidata](https://www.wikidata.org)
+Ministers are included whether or not they also sat in either chamber.
 
----
+The version described in the accompanying data paper contains 5,792
+people, 149 offices or legislative terms, and 16,941 person–office
+associations.
 
-## 2. Stack
+## Database structure
 
-| Layer    | Technology                                      |
-|----------|-------------------------------------------------|
-| Database | SQLite — 3 tables: `persons`, `legislatures`, `mandates` |
-| ORM      | SQLAlchemy                                      |
-| API      | FastAPI + Pydantic                              |
-| Frontend | HTML / CSS / JS (static, served by FastAPI)     |
+![Relational database schema](docs/db_diagram.png)
 
----
+| Table | Contents |
+|---|---|
+| `person` | Names, aliases, birth and death dates, and source identifiers |
+| `mandate` | Institutions, offices or legislative terms, dates, and associated identifiers |
+| `person_mandate` | Person–office associations, individual tenure dates, constituency, political affiliation, and additional roles |
 
-## 3. Project structure
+The model separates identity from appointments: a person is recorded once
+and can be linked to multiple offices across institutions. Attributes
+that change between appointments belong to `person_mandate`.
 
-```
+This supports career reconstruction, date-based searches for office
+holders, and the contextualization of person mentions. Individual tenure
+dates may differ from the dates of an office or legislature.
+
+## Repository structure
+
+```text
 .
-├── app/
-│   ├── __init__.py
-│   ├── main.py          # FastAPI app entry point
-│   ├── config.py        # Settings (DB path, etc.)
-│   ├── database.py      # SQLAlchemy engine & session
-│   ├── models.py        # ORM models
-│   ├── schemas.py       # Pydantic schemas
-│   ├── crud.py          # Database query logic
-│   ├── routes.py        # API routes
-│   ├── api_meta.py      # API metadata
-│   └── index.html       # Frontend (served at /)
-├── db/
-│   ├── data/
-│   │   ├── prosopography.tsv   # Source data
-│   │   └── prosopography.db    # Generated database (after migration)
-│   └── run_migration.py        # Migration script
-└── requirements.txt
+├── decidon_scraping/
+│   ├── scripts/        # Collection, merging, and validation
+│   └── output/         # CSVs, merged TSV, and validation reports
+├── decidon_app/
+│   ├── api/            # Search API and indexing scripts
+│   ├── db_build/       # Database-building script and SQLite database
+│   └── front-end/      # Reserved for frontend development
+├── docs/               # Schema and workflow figures
+├── requirements.txt
+└── README.md
 ```
 
----
+## Getting started
 
-## 4. Prerequisites
+- To collect and process the data, see
+  [decidon_scraping/README.md](decidon_scraping/README.md).
+- To build the SQLite database and work with the API, see
+  [decidon_app/README.md](decidon_app/README.md).
 
-- Python 3.10 or higher
-- pip
+## Limitations
 
----
+The resource covers deputies, senators, and ministers, not all
+participants in public debate. It inherits missing information and
+inconsistencies from its sources; ministerial data rely on Wikipedia.
 
-## 5. Installation
+Cross-source reconciliation may contain unresolved duplicates or
+incorrect matches. Temporal searches depend on the completeness and
+precision of tenure dates.
 
-**Step 1 — Create and activate a virtual environment**
-
-```bash
-python3 -m venv .venv
-```
-
-On macOS / Linux:
-```bash
-source .venv/bin/activate
-```
-
-On Windows:
-```bash
-.\.venv\Scripts\activate
-```
-
-**Step 2 — Install dependencies**
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-## 6. Database initialisation
-
-The database is generated from a TSV source file using the migration script.
-
-**Step 1 — Place the source file**
-
-Store `prosopography.tsv` at the following path:
-
-```
-./db/data/prosopography.tsv
-```
-
-**Step 2 — Run the migration**
-
-```bash
-python3 db/run_migration.py
-```
-
-This creates `prosopography.db` at `./db/data/prosopography.db`.
-
----
-
-## 7. Launch the app
-
-Run the following command from the project root:
-
-```bash
-uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
-```
-
-The application will be available at [http://127.0.0.1:8000](http://127.0.0.1:8000).
-
----
-
-## 8. API documentation
-
-Interactive API documentation (generated by FastAPI) is available at:
-
-- **Swagger UI**: [http://127.0.0.1:8000/api/docs](http://127.0.0.1:8000/api/docs)
-- **ReDoc**: [http://127.0.0.1:8000/api/redoc](http://127.0.0.1:8000/api/redoc)
-
-### Main endpoints
-
-| Method | Endpoint                          | Description                              |
-|--------|-----------------------------------|------------------------------------------|
-| GET    | `/persons`                        | List or search persons                   |
-| GET    | `/persons/{person_id}`            | Get a person by ID                       |
-| GET    | `/persons/grouped-mandates`       | Search persons with their grouped mandates |
-| GET    | `/persons/by-role`                | Get persons holding a role at a given date |
-| GET    | `/legislatures`                   | List legislatures                        |
-| GET    | `/legislatures/{id}/members`      | Get members of a legislature             |
-| GET    | `/lookup`                         | Fuzzy name lookup                        |
+Recollecting data from the websites may produce results different from
+the March 2026 collection.

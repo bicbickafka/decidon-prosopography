@@ -88,9 +88,7 @@ class PersonEnrich(WikiEnrich):
 
 class Person(Base, PersonEnrich):
     __tablename__ = "person"
-
-    id: Mapped[str] = mapped_column(String, primary_key=True)
-    person_id: Mapped[str] = mapped_column(String, nullable=False, unique=True, index=True)
+    person_id: Mapped[str] = mapped_column(String, nullable=False, unique=True, index=True, primary_key=True)
     last_name: Mapped[str] = mapped_column(String, nullable=False, index=True)
     first_name: Mapped[str] = mapped_column(String, nullable=False, index=True)
     alias: Mapped[Optional[str]] = mapped_column(String, nullable=True, index=True)
@@ -118,8 +116,7 @@ class Person(Base, PersonEnrich):
 class Mandate(Base, AbstractDate, WikiEnrich):
     __tablename__ = "mandate"
 
-    id: Mapped[str] = mapped_column(String, primary_key=True)
-    mandate_id: Mapped[str] = mapped_column(String, nullable=False, unique=True, index=True)
+    mandate_id: Mapped[str] = mapped_column(String, nullable=False, unique=True, index=True, primary_key=True)
     institution: Mapped[InstitutionType] = mapped_column(Enum(InstitutionType), nullable=False)
     name: Mapped[str] = mapped_column(String, nullable=False)
 

@@ -1,32 +1,39 @@
-# Virtual environments
-venv/
-.venv/
-../.venv/
+# Generated SQLite database
+/decidon_app/db_build/prosopography.db
 
-# Database files
-*.db
+# SQLite temporary files
+*.db-journal
+*.db-wal
+*.db-shm
 
-# Data & scraping
-scraping/
-db/data/
+# Generated validation reports
+/decidon_scraping/output/validation_issues.tsv
+/decidon_scraping/output/validation_summary.tsv
 
-# Python cache
+# Python caches
 __pycache__/
 *.py[cod]
-*$py.class
+.pytest_cache/
 
-# IDE
+# Virtual environments
+.venv/
+venv/
+
+# Local environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# IDE settings
 .idea/
 .vscode/
 
-# OS files
+# Operating-system files
 .DS_Store
 Thumbs.db
 
-# Search indexes
-app/indexdir/
+# Logs
+*.log
 
-# Specific files (quote paths with spaces)
-app/VT_tests
-db/run_migration.py
-db/tests-cascade.py
+# Scraping caches, wherever they occur
+.cache_senateurs/
