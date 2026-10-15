@@ -1,20 +1,45 @@
 # decidon-prosopography
 
-A Database of Office Holders of the French Third Republic to Study Agenda-Setting Dynamics
+This repository contains the data collection pipeline and search
+application for a prosopographic SQLite database of ministers, deputies,
+and senators of the French Third Republic (1870–1940).
 
-A SQLite database of deputies, senators, and ministers during the French
-Third Republic (1870–1940), with collection and processing scripts and a
-search API.
+The database was designed for DECIDON, a project that studies how
+Parliament and the press influence each other's allocation of attention
+to policy issues, a process known as agenda-setting.
 
-Developed for DECIDON, the resource supports research into agenda-setting
-dynamics between Parliament and the press. It provides a reference layer
-for linking person mentions in parliamentary debates and press articles
-to historical office holders.
+The repository is organized into two components:
 
+- [`decidon_scraping/`](decidon_scraping/): scripts for collecting,
+  reconciling, and validating prosopographic information from three
+  sources: the Wikipedia list of French governments for ministers,
+  Sycomore, the Assemblée nationale’s database, for deputies, and
+  official lists published by the Sénat for senators.
+- [`decidon_app/`](decidon_app/): tools for building the relational
+  SQLite database from the processed data and querying it through a
+  FastAPI search application.
+
+The relational schema connects individuals to the offices they held.
+It provides a reference layer for linking person mentions extracted
+from the verbatim accounts of parliamentary sessions and press articles
+to historical office holders and their institutional appointments.
 ![Data collection and database-building workflow](docs/journal_officiel.png)
 
+## Repository Structure
 
-![Data collection and database-building workflow](docs/workflow.png)
+```text
+.
+├── decidon_scraping/
+│   ├── scripts/        # Scraping, merging, and validation
+│   └── output/         # CSVs, merged TSV, and validation reports
+├── decidon_app/
+│   ├── api/            # Search API and indexing scripts
+│   ├── db_build/       # Database-building script
+│   └── front-end/      # Frontend development
+├── docs/               # Figures
+├── requirements.txt
+└── README.md
+```
 
 ## Data Sources
 
@@ -49,22 +74,6 @@ that change between appointments belong to `person_mandate`.
 This supports career reconstruction, date-based searches for office
 holders, and the contextualization of person mentions. Individual tenure
 dates may differ from the dates of an office or legislature.
-
-## Repository Structure
-
-```text
-.
-├── decidon_scraping/
-│   ├── scripts/        # Collection, merging, and validation
-│   └── output/         # CSVs, merged TSV, and validation reports
-├── decidon_app/
-│   ├── api/            # Search API and indexing scripts
-│   ├── db_build/       # Database-building script and SQLite database
-│   └── front-end/      # Reserved for frontend development
-├── docs/               # Schema and workflow figures
-├── requirements.txt
-└── README.md
-```
 
 ## Getting Started
 
