@@ -1,4 +1,6 @@
-# DECIDON — Prosopographic database of the French Third Republic
+![Data collection and database-building workflow](docs/journal_officiel.png)
+
+# A Database of Office Holders of the French Third Republic to Study Agenda-Setting Dynamics
 
 A SQLite database of deputies, senators, and ministers during the French
 Third Republic (1870–1940), with collection and processing scripts and a
