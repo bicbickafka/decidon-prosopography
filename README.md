@@ -7,6 +7,7 @@ and senators of the French Third Republic (1870–1940).
 The database was designed for DECIDON, a project that studies how
 Parliament and the press influence each other's allocation of attention
 to policy issues, a process known as agenda-setting.
+To understand how information circulates between Parliament and the press, the project requires structured data on office holders: who they are and, in particular, what position they hold when they speak or are spoken about. The prosopographic database was created to meet this need.
 
 The repository is organized into two components:
 
@@ -19,10 +20,6 @@ The repository is organized into two components:
   SQLite database from the processed data and querying it through a
   FastAPI search application.
 
-The relational schema connects individuals to the offices they held.
-It provides a reference layer for linking person mentions extracted
-from the verbatim accounts of parliamentary sessions and press articles
-to historical office holders and their institutional appointments.
 ![Data collection and database-building workflow](docs/journal_officiel.png)
 
 ## Repository Structure
