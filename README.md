@@ -1,8 +1,6 @@
 # decidon-prosopography
 
-This repository contains the data scraping pipeline and search
-app for a prosopographic SQLite database of ministers, deputies,
-and senators of the French Third Republic (1870–1940).
+This repository contains the data scraping pipeline, search app, and named entity linking tools for a prosopographic SQLite database of ministers, deputies, and senators of the French Third Republic (1870–1940).
 
 The database was designed for DECIDON, a project that studies how
 Parliament and the press influence each other's allocation of attention
