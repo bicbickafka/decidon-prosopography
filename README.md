@@ -1,6 +1,6 @@
-![Data collection and database-building workflow](docs/journal_officiel.png)
+# decidon-prosopography
 
-# A Database of Office Holders of the French Third Republic to Study Agenda-Setting Dynamics
+A Database of Office Holders of the French Third Republic to Study Agenda-Setting Dynamics
 
 A SQLite database of deputies, senators, and ministers during the French
 Third Republic (1870–1940), with collection and processing scripts and a
@@ -11,9 +11,12 @@ dynamics between Parliament and the press. It provides a reference layer
 for linking person mentions in parliamentary debates and press articles
 to historical office holders.
 
+![Data collection and database-building workflow](docs/journal_officiel.png)
+
+
 ![Data collection and database-building workflow](docs/workflow.png)
 
-## Data
+## Data Sources
 
 Data were collected in March 2026 from three sources:
 
@@ -29,7 +32,7 @@ The version described in the accompanying data paper contains 5,792
 people, 149 offices or legislative terms, and 16,941 person–office
 associations.
 
-## Database structure
+## Database Structure
 
 ![Relational database schema](docs/db_diagram.png)
 
@@ -47,7 +50,7 @@ This supports career reconstruction, date-based searches for office
 holders, and the contextualization of person mentions. Individual tenure
 dates may differ from the dates of an office or legislature.
 
-## Repository structure
+## Repository Structure
 
 ```text
 .
@@ -63,22 +66,9 @@ dates may differ from the dates of an office or legislature.
 └── README.md
 ```
 
-## Getting started
+## Getting Started
 
 - To collect and process the data, see
   [decidon_scraping/README.md](decidon_scraping/README.md).
 - To build the SQLite database and work with the API, see
   [decidon_app/README.md](decidon_app/README.md).
-
-## Limitations
-
-The resource covers deputies, senators, and ministers, not all
-participants in public debate. It inherits missing information and
-inconsistencies from its sources; ministerial data rely on Wikipedia.
-
-Cross-source reconciliation may contain unresolved duplicates or
-incorrect matches. Temporal searches depend on the completeness and
-precision of tenure dates.
-
-Recollecting data from the websites may produce results different from
-the March 2026 collection.
