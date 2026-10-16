@@ -7,9 +7,10 @@ The database was designed for DECIDON, a research project that studies how Parli
 To understand how information circulates between Parliament and the press, the researchers need structured data on office holders: who they are and, in particular, what position they hold when they speak or are spoken about. The data are structured in a relational schema, so that named entities extracted from the verbatim accounts of parliamentary sessions and from press articles can be linked to person records and to the offices these persons held.
 
 ![journal_officiel](docs/journal_officiel.jpg)
+
 <p align="center">
   <em>
-    Figure 1. Journal officiel (the verbatim accounts of parliamentary sessions).
+    Figure 1. Journal officiel with verbatim records of what was said in Parliament.
     Source: <a href="https://gallica.bnf.fr/ark:/12148/bpt6k64574218/f1.item">Gallica</a>.
   </em>
 </p>
@@ -38,8 +39,28 @@ The dataset aggregates prosopographic information scraped from three sources: mi
 The schema has three tables: person, mandate and person_mandate (Figure 1). The person table stores biographical information: first and last name, alias, dates of birth and death, and source identifiers. The mandate table records offices: the institution (Gouvernement, Chambre or Sénat), the office name, its start and end dates, and Wikipedia and Wikidata identifiers. The junction table person_mandate links individuals to offices. It records the person's position, constituency, political party, individual tenure dates, and any additional roles (such as president or stenographer). The tenure dates are those of the individual, which may differ from the dates of the office or legislature recorded in mandate. In total, person contains 5,792 records, person_mandate 16,941 and mandate 149 (Figures 3).
 
 ![db_diagram](docs/db_diagram.jpg)
+
+<p align="center">
+  <em>
+    Figure 1. Prosopographic database of elected officials: schema.
+  </em>
+</p>
+
 ![db_example](docs/db_example.jpg)
+
+<p align="center">
+  <em>
+    Figure 2. Prosopographic database of elected officials: example.
+  </em>
+</p>
+
 ![db_record_count](docs/db_record_count.jpg)
+
+<p align="center">
+  <em>
+    Figure 3. Prosopographic database of elected officials: record count.
+  </em>
+</p>
 
 ## Use Case
 
