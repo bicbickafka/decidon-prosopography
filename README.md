@@ -25,13 +25,7 @@ To understand how information circulates between Parliament and the press, the r
 
 ## Data Sources
 
-The dataset aggregates prosopographic information scraped from three sources in March 2026: 
-
-| Office holders | Source |
-|---|---|
-| Deputies | [Sycomore, Assemblée nationale](https://www2.assemblee-nationale.fr/sycomore/liste/) |
-| Senators | [Sénat: senators of the Third Republic](https://www.senat.fr/senateurs-3eme-republique/senatl.html) |
-| Ministers | [French Wikipedia: list of French governments](https://fr.wikipedia.org/wiki/Liste_des_gouvernements_de_la_France) |
+The dataset aggregates prosopographic information scraped from three sources: ministers from the Wikipedia list of French governments, deputies from Sycomore, the Assemblée nationale’s database, and senators from official lists published by the Sénat.
 
 ## Database Structure
 
