@@ -10,11 +10,8 @@ To understand how information circulates between Parliament and the press, the r
 
 ![journal_officiel](docs/journal_officiel.png)
 <p align="center">
-  <em>Figure 1. Relational schema of the prosopographic database.</em>
+  <em>Figure 1. Journal officiel (the verbatim accounts of parliamentary sessions). Source: [Gallica](https://gallica.bnf.fr/ark:/12148/bpt6k64574218/f1.item)</em>
 </p>
-
-*Figure 1. Journal officiel.*
-Journal officiel (the verbatim accounts of parliamentary sessions) 
 
 ## Repository Structure
 
