@@ -1,7 +1,7 @@
 # XXX
 
 <p align="center">
-  <img src="docs/workflow.jpg" width="300" alt="workflow">
+  <img src="decidon_scraping/docs/workflow.jpg" width="300" alt="workflow">
   <br>
   <em>
     Figure 1. Workflow from scraping to database creation.
