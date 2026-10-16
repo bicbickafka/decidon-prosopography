@@ -8,6 +8,8 @@ To understand how information circulates between Parliament and the press, the r
 
 ![journal_officiel](docs/journal_officiel.png)
 
+*Figure 1. Journal officiel.*
+
 ## Repository Structure
 
 ```text
