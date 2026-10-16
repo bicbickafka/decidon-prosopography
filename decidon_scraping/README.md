@@ -4,11 +4,13 @@
   <img src="../docs/workflow.jpg" width="1000" alt="workflow">
   <br>
   <em>
-    Figure 1. Workflow from scraping to database creation.
+    Figure 1. Workflow from data scraping to database creation.
   </em>
 </p>
 
 
+
+// OLD
 Scripts for collecting, merging, and validating records of deputies,
 senators, and ministers of the French Third Republic (1870–1940).
 
