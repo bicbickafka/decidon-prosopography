@@ -1,4 +1,13 @@
-# DECIDON — Data collection and processing
+# XXX
+
+<p align="center">
+  <img src="docs/workflow.jpg" width="300" alt="db_record_count">
+  <br>
+  <em>
+    Figure 1. Workflow from scraping to database creation.
+  </em>
+</p>
+
 
 Scripts for collecting, merging, and validating records of deputies,
 senators, and ministers of the French Third Republic (1870–1940).
