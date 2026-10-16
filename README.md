@@ -10,7 +10,7 @@ To understand how information circulates between Parliament and the press, the r
   <img src="docs/journal_officiel.jpg" width="500" alt="journal_officiel">
   <br>
   <em>
-    Figure 1. Journal officiel with verbatim records of what was said in Parliament.
+    Figure 1. Journal officiel: verbatim records of what was said in Parliament.
     Source: <a href="https://gallica.bnf.fr/ark:/12148/bpt6k64574218/f1.item">Gallica</a>.
   </em>
 </p>
