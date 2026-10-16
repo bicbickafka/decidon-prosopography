@@ -46,17 +46,17 @@ The schema has three tables: person, mandate and person_mandate (Figure 1). The 
   </em>
 </p>
 
-![db_example](docs/db_example.jpg)
-
 <p align="center">
+  <img src="docs/db_example.jpg" width="800" alt="db_example">
+  <br>
   <em>
     Figure 3. Prosopographic database of elected officials: example.
   </em>
 </p>
 
-![db_record_count](docs/db_record_count.jpg)
-
 <p align="center">
+  <img src="docs/db_record_count.jpg" width="800" alt="db_record_count">
+  <br>
   <em>
     Figure 4. Prosopographic database of elected officials: record count.
   </em>
