@@ -42,7 +42,7 @@ The schema has three tables: person, mandate and person_mandate (Figure 1). The 
   <img src="docs/db_diagram.jpg" width="800" alt="db_diagram">
   <br>
   <em>
-    Figure 2. Prosopographic database of elected officials: schema.
+    Figure 2. Prosopographic database of office holders: schema.
   </em>
 </p>
 
@@ -50,7 +50,7 @@ The schema has three tables: person, mandate and person_mandate (Figure 1). The 
   <img src="docs/db_example.jpg" width="800" alt="db_example">
   <br>
   <em>
-    Figure 3. Prosopographic database of elected officials: example.
+    Figure 3. Prosopographic database of office holders: example.
   </em>
 </p>
 
@@ -58,7 +58,7 @@ The schema has three tables: person, mandate and person_mandate (Figure 1). The 
   <img src="docs/db_record_count.jpg" width="800" alt="db_record_count">
   <br>
   <em>
-    Figure 4. Prosopographic database of elected officials: record count.
+    Figure 4. Prosopographic database of office holders: record count.
   </em>
 </p>
 
