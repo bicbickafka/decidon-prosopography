@@ -6,11 +6,13 @@ It also includes a FastAPI search application and a Whoosh search engine for ret
 The database was designed for DECIDON, a research project that studies how Parliament and the press influence each other's allocation of attention to policy issues, a process known as agenda-setting.
 To understand how information circulates between Parliament and the press, the researchers need structured data on office holders: who they are and, in particular, what position they hold when they speak or are spoken about. The data are structured in a relational schema, so that named entities extracted from the verbatim accounts of parliamentary sessions and from press articles can be linked to person records and to the offices these persons held.
 
-
-
 ![journal_officiel](docs/journal_officiel.png)
+
 <p align="center">
-  <em>Figure 1. Journal officiel (the verbatim accounts of parliamentary sessions). Source: [Gallica](https://gallica.bnf.fr/ark:/12148/bpt6k64574218/f1.item)</em>
+  <em>
+    Figure 1. Journal officiel (the verbatim accounts of parliamentary sessions).
+    Source: <a href="https://gallica.bnf.fr/ark:/12148/bpt6k64574218/f1.item">Gallica</a>.
+  </em>
 </p>
 
 ## Repository Structure
