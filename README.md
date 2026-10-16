@@ -11,13 +11,12 @@ To understand how information circulates between Parliament and the press, the r
 ## Repository Structure
 
 ```text
-.
 ├── decidon_scraping/
 │   ├── scripts/        # Data scraping, reconciliation, and validation
 │   └── output/         # Data outputs and validation reports
 ├── decidon_app/
 │   ├── api/            # FastAPI search application and a Whoosh search engine
-│   ├── db_build/       # Building the relational SQLite database
+│   ├── db_build/       # Relational SQLite database creation
 │   └── front-end/      # Frontend development
 ├── docs/               # Figures
 ├── requirements.txt    # Python dependencies
@@ -26,19 +25,13 @@ To understand how information circulates between Parliament and the press, the r
 
 ## Data Sources
 
-Data were collected in March 2026 from three sources:
+The dataset aggregates prosopographic information scraped from three sources in March 2026: 
 
 | Office holders | Source |
 |---|---|
 | Deputies | [Sycomore, Assemblée nationale](https://www2.assemblee-nationale.fr/sycomore/liste/) |
 | Senators | [Sénat: senators of the Third Republic](https://www.senat.fr/senateurs-3eme-republique/senatl.html) |
 | Ministers | [French Wikipedia: list of French governments](https://fr.wikipedia.org/wiki/Liste_des_gouvernements_de_la_France) |
-
-Ministers are included whether or not they also sat in either chamber.
-
-The version described in the accompanying data paper contains 5,792
-people, 149 offices or legislative terms, and 16,941 person–office
-associations.
 
 ## Database Structure
 
