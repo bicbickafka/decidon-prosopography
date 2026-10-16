@@ -1,5 +1,9 @@
 # Data scraping, reconciliation, and validation
 
+The database is compiled from three online sources: the French-language Wikipedia page listing the governments of France (ministers), Sycomore (deputies), and the Sénat's official lists of senators of the Third Republic. Data were scraped in March 2026. 
+
+Python scripts scrape and parse each source: they retrieve the HTML, extract structured data from tables and detail pages, and convert it into intermediate representations that are loaded into SQLite. 
+
 <p align="center">
   <img src="../docs/workflow.jpg" width="1000" alt="workflow">
   <br>
@@ -7,8 +11,6 @@
     Figure 1. Workflow from data scraping to database creation.
   </em>
 </p>
-
-
 
 // OLD
 Scripts for collecting, merging, and validating records of deputies,
