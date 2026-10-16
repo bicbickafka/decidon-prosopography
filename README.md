@@ -29,18 +29,10 @@ The dataset aggregates prosopographic information scraped from three sources: mi
 
 ## Database Structure
 
+The schema has three tables: person, mandate and person_mandate (Figure 1). The person table stores biographical information: first and last name, alias, dates of birth and death, and source identifiers. The mandate table records offices: the institution (Gouvernement, Chambre or Sénat), the office name, its start and end dates, and Wikipedia and Wikidata identifiers. The junction table person_mandate links individuals to offices. It records the person's position, constituency, political party, individual tenure dates, and any additional roles (such as president or stenographer). The tenure dates are those of the individual, which may differ from the dates of the office or legislature recorded in mandate. In total, person contains 5,792 records, person_mandate 16,941 and mandate 149 (Figures 3).
+
 ![Relational database schema](docs/db_diagram.png)
 
-| Table | Contents |
-|---|---|
-| `person` | Names, aliases, birth and death dates, and source identifiers |
-| `mandate` | Institutions, offices or legislative terms, dates, and associated identifiers |
-| `person_mandate` | Person–office associations, individual tenure dates, constituency, political affiliation, and additional roles |
+## Use Case
 
-The model separates identity from appointments: a person is recorded once
-and can be linked to multiple offices across institutions. Attributes
-that change between appointments belong to `person_mandate`.
-
-This supports career reconstruction, date-based searches for office
-holders, and the contextualization of person mentions. Individual tenure
-dates may differ from the dates of an office or legislature.
+The database serves as a reference layer for named entity linking (NEL). After named entity recognition (NER) has identified person mentions in the digitized Journal officiel (the verbatim accounts of parliamentary sessions) and in the press corpora, the NEL stage matches each mention to a record in the database. Each candidate entity carries temporal attributes (mandate start and end dates) and institutional attributes (chamber, office, constituency, party). These attributes help resolve ambiguities that names alone cannot. Examples include homonyms and speakers referred to only by title, last name or alias. Candidates for a mention can be restricted to persons who held a mandate on the date of the session or article. Once linked, mentions can be filtered and aggregated by person, mandate, institution or party. This lets researchers trace who speaks and who is spoken about, and in what capacity, in both Parliament and the press.
