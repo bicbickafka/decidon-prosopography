@@ -44,10 +44,3 @@ that change between appointments belong to `person_mandate`.
 This supports career reconstruction, date-based searches for office
 holders, and the contextualization of person mentions. Individual tenure
 dates may differ from the dates of an office or legislature.
-
-## Getting Started
-
-- To collect and process the data, see
-  [decidon_scraping/README.md](decidon_scraping/README.md).
-- To build the SQLite database and work with the API, see
-  [decidon_app/README.md](decidon_app/README.md).
