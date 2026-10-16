@@ -1,4 +1,4 @@
-# decidon-prosopography
+# Decidon Prosopography
 
 This repository contains the code used to build a prosopographic database of ministers, deputies, and senators of the French Third Republic (1870–1940). 
 It also includes a FastAPI search application and a Whoosh search engine for retrieving prosopographic records from the database.
