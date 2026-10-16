@@ -24,14 +24,14 @@ The repository is organized into two components:
 ```text
 .
 ├── decidon_scraping/
-│   ├── scripts/        # Scraping, merging, and validation
-│   └── output/         # CSVs, merged TSV, and validation reports
+│   ├── scripts/        # Code for data scraping, reconciliation, and validation
+│   └── output/         # Data outputs and validation reports
 ├── decidon_app/
-│   ├── api/            # Search API and indexing scripts
-│   ├── db_build/       # Database-building script
+│   ├── api/            # Code for matching named entities in parliamentary debates and press corpora with a Whoosh search engine, and querying the database through a FastAPI search application.
+│   ├── db_build/       # Code for building a relational SQLite database
 │   └── front-end/      # Frontend development
 ├── docs/               # Figures
-├── requirements.txt
+├── requirements.txt    # Python dependencies
 └── README.md
 ```
 
