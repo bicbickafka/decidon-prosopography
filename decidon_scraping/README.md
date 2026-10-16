@@ -1,12 +1,12 @@
 # Data scraping, reconciliation, and validation
 
-The database is compiled from three online sources: the French-language Wikipedia page listing the governments of France (ministers), Sycomore (deputies), and the Sénat's official lists of senators of the Third Republic.
+The dataset combines three source collections, each corresponding to a category of office holders: Sycomore for deputies, the Sénat’s historical directory for senators, and the French-language Wikipedia list of governments for ministers. 
 
-merge.py concatenates the three source CSVs, adds an institution column, aligns their columns, and fills absent columns with empty strings. 
+- merge.py concatenates the three source CSVs, adds an institution column, aligns their columns, and fills absent columns with empty strings. 
 
-validate.py checks the resulting TSV and produces two reports
+- validate.py checks the resulting TSV and produces two reports
 
-run_migration.py reads the TSV, constructs person and mandate identifiers, groups records, and removes duplicate person–mandate combinations before loading SQLite.
+- run_migration.py reads the TSV, constructs person and mandate identifiers, groups records, and removes duplicate person–mandate combinations before loading SQLite.
 
 
 
