@@ -1,4 +1,4 @@
-# XXX
+# Data scraping, reconciliation, and validation
 
 <p align="center">
   <img src="../docs/workflow.jpg" width="1000" alt="workflow">
