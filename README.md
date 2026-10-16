@@ -14,8 +14,7 @@ The repository is organized into two components:
   Sycomore, the Assemblée nationale’s database, for deputies, and
   official lists published by the Sénat for senators.
 - [`decidon_app/`](decidon_app/): code for building a relational
-  SQLite database from the processed data, retrieving candidate matches
-  for named entity linking with Whoosh, and querying the database through
+  SQLite database from the processed data, matching named entities in parliamentary debates and press corpora with a Whoosh search engine, and querying the database through
   a FastAPI search application.
 
 ![Data collection and database-building workflow](docs/journal_officiel.png)
