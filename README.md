@@ -1,18 +1,19 @@
 # decidon-prosopography
 
-This repository contains the code used to build a prosopographic database of ministers, deputies, and senators of the French Third Republic (1870–1940). It also includes a FastAPI search application and a Whoosh-based search engine for retrieving prosopographic records from the database.
+This repository contains the code used to build a prosopographic database of ministers, deputies, and senators of the French Third Republic (1870–1940). 
+It also includes a FastAPI search application and a Whoosh-based search engine for retrieving prosopographic records from the database.
 
-The database was designed for DECIDON, a project that studies how Parliament and the press influence each other's allocation of attention to policy issues, a process known as agenda-setting.
-To understand how information circulates between Parliament and the press, the project requires structured data on office holders: who they are and, in particular, what position they hold when they speak or are spoken about. The prosopographic database supports named entity linking by connecting speakers and person mentions in parliamentary debates and press articles to person records in the database.
+The database was designed for DECIDON, a research project that studies how Parliament and the press influence each other's allocation of attention to policy issues, a process known as agenda-setting.
+To understand how information circulates between Parliament and the press, the researchers need structured data on office holders: who they are and, in particular, what position they hold when they speak or are spoken about. The data are structured in a relational schema, so that named entities extracted from the verbatim accounts of parliamentary sessions and from press articles can be linked to person records and to the offices these persons held.
 
 The repository is organized into two components:
 
-- [`decidon_scraping/`](decidon_scraping/): scripts for collecting,
+- [`decidon_scraping/`](decidon_scraping/): code for scraping,
   reconciling, and validating prosopographic information from three
   sources: the Wikipedia list of French governments for ministers,
   Sycomore, the Assemblée nationale’s database, for deputies, and
   official lists published by the Sénat for senators.
-- [`decidon_app/`](decidon_app/): tools for building the relational
+- [`decidon_app/`](decidon_app/): code for building a relational
   SQLite database from the processed data, retrieving candidate matches
   for named entity linking with Whoosh, and querying the database through
   a FastAPI search application.
