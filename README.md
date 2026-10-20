@@ -7,7 +7,7 @@ The database was developed for DECIDON, a research project studying how Parliame
 Understanding how information circulates between Parliament and the press requires structured records of office holders: who they are and, in particular, what position they hold when they speak or are spoken about.
 
 <p align="center">
-  <img src="docs/journal_officiel.jpg" width="500" alt="journal_officiel">
+  <img src="docs/journal_officiel.jpg" width="300" alt="journal_officiel">
   <br>
   <em>
     Figure 1. Verbatim records of parliamentary debates published in the Journal officiel.
