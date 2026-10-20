@@ -18,11 +18,11 @@ Understanding how information circulates between Parliament and the press requir
 ## Repository Structure
 
 ```text
-├── decidon_app/
-│   ├── api/            # FastAPI search application
-│   └── front-end/      # Web interface
 ├── decidon_database/   # SQLite database build scripts
-├── decidon_index/      # Whoosh search index
+├── decidon_nel/        # Named Entity Linking module
+│   ├── api/            # FastAPI search application
+│   ├── front-end/      # Web interface
+│   └── index/          # Whoosh search index and pipeline scripts
 ├── decidon_scraping/
 │   ├── output/         # Scraping outputs and validation reports
 │   └── scripts/        # Data scraping, merging, and validation scripts
