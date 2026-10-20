@@ -1,32 +1,33 @@
-# A Database of Office Holders of the French Third Republic to Study Agenda-Setting Dynamics
+# Database Creation and Schema
 
-This repository contains the code used to build a prosopographic database of ministers, deputies, and senators of the French Third Republic (1870–1940). 
-It also includes a FastAPI search application and a Whoosh search index for retrieving records from the database.
+## Database Creation
 
-The database was developed for DECIDON, a research project studying how Parliament and the press influence each other's allocation of attention to policy issues, a process known as agenda-setting.
-Understanding how information circulates between Parliament and the press requires structured records of office holders: who they are and, in particular, what position they hold when they speak or are spoken about.
+Because individuals frequently held multiple offices, the same person may appear as a deputy in Sycomore, a senator in the Sénat lists, and a minister on Wikipedia. During database construction (executed via run_migration.py), records are consolidated using a deterministic person key. This key prioritizes the Wikidata QID where available, falling back sequentially to the Sénat identifier and the Sycomore identifier. Records without any of these identifiers are grouped using an exact combination of last name, first name, and birth date. Records with the same resulting key are represented by a single person entity.
+
+## Database Schema
+
+The schema is made up of three tables: person, mandate and person_mandate (Figure 1). The person table stores biographical information: first and last name, alias, dates of birth and death, and source identifiers. The mandate table records institutional entities: the institution (Gouvernement, Chambre or Sénat), name,  start and end dates, and Wikipedia and Wikidata identifiers. The junction table person_mandate links individuals to these contexts. It records the person's position, constituency, political party, individual tenure dates, and any additional roles (such as president or stenographer).
 
 <p align="center" style="margin-top: 30px;">
-  <img src="docs/journal_officiel.jpg" width="400" alt="journal_officiel">
+  <img src="../db_diagram.jpg" width="400" alt="db_diagram">
   <br>
   <em>
-    Figure 1. Verbatim records of parliamentary debates published in the Journal officiel.
+    Figure 1. Schema.
     Source: <a href="https://gallica.bnf.fr/ark:/12148/bpt6k64574218/f1.item">Gallica</a>.
   </em>
 </p>
 
-## Repository Structure
+As shown in Figure 2, the database consists of 5,792 individual office holders in the person table, 16,941 political appointments in person_mandate, and 149 institutional entities in mandate.
 
-```text
-├── decidon_app/
-│   ├── api/            # FastAPI search application
-│   └── front-end/      # Web interface
-├── decidon_database/   # SQLite database build scripts
-├── decidon_index/      # Whoosh search index
-├── decidon_scraping/
-│   ├── output/         # Scraping outputs and validation reports
-│   └── scripts/        # Data scraping, merging, and validation scripts
-├── docs/               # Figures
-├── README.md           # Project overview
-└── requirements.txt    # Python dependencies
-```
+<p align="center" style="margin-top: 30px;">
+  <img src="../db_record_count" width="400" alt="db_record_count">
+  <br>
+  <em>
+    Figure 2. Record count.
+    Source: <a href="https://gallica.bnf.fr/ark:/12148/bpt6k64574218/f1.item">Gallica</a>.
+  </em>
+</p>
+
+This relational architecture cleanly separates individual profiles from the institutional entities and specific service periods in which they operated. A person may hold several successive or simultaneous positions, while a government or legislature includes many people. The person_mandate table represents these relationships and stores attributes that depend on a particular appointment or period of service, rather than on the individual alone. This approach prevents data redundancy by eliminating the need to duplicate biographical entities for every institutional appearance, thereby facilitating cross-institutional career tracking.
+
+SQLite provides a lightweight, self-contained format that is straightforward to distribute and integrate into research workflows. The database can be queried directly, used by command-line or web applications, and exported to other formats.
