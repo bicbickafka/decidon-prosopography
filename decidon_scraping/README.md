@@ -1,107 +1,20 @@
-# Data scraping, reconciliation, and validation
+# Data Scraping, Merging, and Validation
 
-The dataset combines three source collections, each corresponding to a category of office holders: Sycomore for deputies, the Sénat’s historical directory for senators, and the French-language Wikipedia list of governments for ministers. 
-
-- merge.py concatenates the three source CSVs, adds an institution column, aligns their columns, and fills absent columns with empty strings. 
-
-- validate.py checks the resulting TSV and produces two reports
-
-- run_migration.py reads the TSV, constructs person and mandate identifiers, groups records, and removes duplicate person–mandate combinations before loading SQLite.
-
-
-
-Python scripts scrape and parse each source: they retrieve the HTML, extract structured data from tables and detail pages, and convert it into intermediate representations that are loaded into SQLite. 
-
-<p align="center">
-  <img src="../docs/workflow.jpg" width="1000" alt="workflow">
+<p align="center" style="margin-top: 30px;">
+  <img src="../workflow.jpg" width="400" alt="journal_officiel">
   <br>
   <em>
-    Figure 1. Workflow from data scraping to database creation.
+    Figure 1. Verbatim records of parliamentary debates published in the Journal officiel.
+    Source: <a href="https://gallica.bnf.fr/ark:/12148/bpt6k64574218/f1.item">Gallica</a>.
   </em>
 </p>
 
-// OLD
-Scripts for collecting, merging, and validating records of deputies,
-senators, and ministers of the French Third Republic (1870–1940).
+## Data Scraping
 
-See the [main README](../README.md) for the project context and database
-description.
+The dataset draws on three sources, each corresponding to a category of office holders: Sycomore for deputies, the Sénat’s historical directory for senators, and the French-language Wikipedia articles on government compositions for ministers. Data were scraped in March 2026 using the deputies.py, senators.py, and ministers.py scripts, respectively. The scripts extract biographical information and detailed records of political appointments. Additionally, the scripts retrieve Wikidata QIDs via the Sénat and Sycomore identifiers embedded in politicians' Wikidata pages, or via Wikipedia articles in the case of ministers.
 
-## Inputs
+##  Data Merging
+The three source-specific CSV files are combined into a common TSV file via merge.py. This step preserves source values and represents unavailable fields as empty values; deduplication and entity resolution are handled during the subsequent migration phase.
 
-The collection described in the data paper was carried out in
-March 2026.
-
-| Source | Script | Output |
-|---|---|---|
-| [Sycomore, Assemblée nationale](https://www2.assemblee-nationale.fr/sycomore/liste/) | `scripts/deputies.py` | `output/deputies.csv` |
-| [Sénat](https://www.senat.fr/senateurs-3eme-republique/senatl.html) | `scripts/senators.py` | `output/senators.csv` |
-| [French Wikipedia](https://fr.wikipedia.org/wiki/Liste_des_gouvernements_de_la_France) | `scripts/ministers.py` | `output/ministers.csv` |
-
-The source-specific CSV files are retained before cross-source merging.
-Their row definitions and column-level documentation are being verified.
-
-## Workflow
-
-![Data collection and database-building workflow](../docs/workflow.png)
-
-1. Collect source-specific records with `deputies.py`, `senators.py`,
-   and `ministers.py`.
-2. Merge and reconcile the CSV files with `merge.py`.
-3. Validate the merged TSV with `validate.py`.
-4. Build the SQLite database with
-   `../decidon_app/db_build/run_migration.py`.
-
-Validation and database building are separate operations on the merged
-TSV. Review the validation reports before replacing the reference
-dataset.
-
-## Outputs
-
-All intermediate files and reports are stored in `output/`.
-
-| File | Contents |
-|---|---|
-| `deputies.csv` | Source-specific deputy records |
-| `senators.csv` | Source-specific senator records |
-| `ministers.csv` | Source-specific minister records |
-| `prosopography.tsv` | Merged dataset used to build the database |
-| `validation_summary.tsv` | Summary of validation results |
-| `validation_issues.tsv` | Detailed validation issues |
-
-## Reconciliation and validation
-
-The same individual may appear in several sources. The methodology
-described in the data paper uses Wikidata identifiers, where available,
-and combinations of names and birth and death dates to reconcile
-records.
-
-The precise matching rules, conflict handling, and implemented validation
-checks are being checked against the current scripts.
-
-Validation reports do not establish that the dataset is error-free.
-Missing information may originate in the source rather than in the
-extraction process.
-
-## Usage status
-
-Dependencies, command-line options, path handling, and overwrite behavior
-are being verified. Tested execution commands will be added here.
-
-Before rerunning scripts, preserve the existing outputs and database.
-
-Different starting points support different operations:
-
-| Starting point | Operation |
-|---|---|
-| `prosopography.tsv` | Rebuild the SQLite database |
-| Source-specific CSV files | Repeat merging, validation, and database building |
-| Source websites | Repeat collection and the downstream pipeline |
-
-Recollection requires network access. Changes to website content or
-structure may affect both the extracted data and the scripts.
-
-## Related documentation
-
-- [Project overview](../README.md)
-- [Database building and search API](../decidon_app/README.md)
+##  Data Validation
+validate.py produces two reports. validation_summary.tsv provides counts and field-completeness percentages across institutions (Gouvernement, Chambre, and Sénat), alongside summaries of detected anomalies. validation_issues.tsv flags potential data anomalies across structural records and individual attribute values. Errors and warnings are distinguished; warnings identify cases requiring interpretation checks and do not necessarily indicate incorrect data.
