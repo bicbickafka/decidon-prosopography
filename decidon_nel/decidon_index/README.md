@@ -12,6 +12,8 @@ To optimize recall and precision, queries follow a tiered fallback strategy (Fig
   </em>
 </p>
 
+<br>
+
 Search results are aggregated at the person level (group_results_by_person) to resolve homonyms, title-only references, and overlapping concurrent mandates such as Léon Gambetta's simultaneous service as Minister of the Interior and Deputy in February 1871 (Figure 2). Once linked, mentions can be filtered and aggregated across individuals, mandates, institutions, or parties.
 
 <p align="center">
