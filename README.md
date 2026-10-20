@@ -18,25 +18,19 @@ To understand how information circulates between Parliament and the press, the r
 ## Repository Structure
 
 ```text
-├── decidon_scraping/
-│   ├── scripts/        # Data scraping, reconciliation, and validation
-│   └── output/         # Data outputs and validation reports
 ├── decidon_app/
-│   ├── api/            # FastAPI search application and a Whoosh search engine
-│   ├── db_build/       # Relational SQLite database creation
-│   └── front-end/      # Frontend development
+│   ├── api/            # FastAPI search application
+│   └── front-end/      # Web interface
+├── decidon_database/   # QLite database build scripts
+├── decidon_index/      # Whoosh search index
+├── decidon_scraping/
+│   ├── output/         # Scraping outputs and validation reports
+│   └── scripts/        # Data scraping, merging, and validation scripts
 ├── docs/               # Figures
-├── requirements.txt    # Python dependencies
-└── README.md
+├── README.md           # Project overview
+└── requirements.txt    # Python dependencies
 ```
 
-├── decidon_app/        # FastAPI application and frontend user interface[cite: 6]
-├── decidon_database/   # SQLite database creation scripts and relational schema[cite: 1, 3]
-├── decidon_index/      # Whoosh search index files
-├── decidon_scraping/   # Data scraping, reconciliation, and validation scripts[cite: 2]
-├── docs/               # Project documentation and figures[cite: 3]
-├── README.md           # Project overview and setup instructions
-└── requirements.txt    # Python package dependencies
 
 ## Data Sources
 
