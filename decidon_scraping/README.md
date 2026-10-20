@@ -5,7 +5,6 @@
   <br>
   <em>
     Figure 1. Workflow from data scraping to database creation.
-    Source: <a href="https://gallica.bnf.fr/ark:/12148/bpt6k64574218/f1.item">Gallica</a>.
   </em>
 </p>
 
