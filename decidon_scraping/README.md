@@ -1,7 +1,7 @@
 # Data Scraping, Merging, and Validation
 
 <p align="center" style="margin-top: 30px;">
-  <img src="../workflow.jpg" width="400" alt="journal_officiel">
+  <img src="docs/workflow.jpg" width="400" alt="journal_officiel">
   <br>
   <em>
     Figure 1. Verbatim records of parliamentary debates published in the Journal officiel.
