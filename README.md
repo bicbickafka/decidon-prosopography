@@ -30,6 +30,14 @@ To understand how information circulates between Parliament and the press, the r
 └── README.md
 ```
 
+├── decidon_app/        # FastAPI application and frontend user interface[cite: 6]
+├── decidon_database/   # SQLite database creation scripts and relational schema[cite: 1, 3]
+├── decidon_index/      # Whoosh search index files
+├── decidon_scraping/   # Data scraping, reconciliation, and validation scripts[cite: 2]
+├── docs/               # Project documentation and figures[cite: 3]
+├── README.md           # Project overview and setup instructions
+└── requirements.txt    # Python package dependencies
+
 ## Data Sources
 
 The dataset aggregates prosopographic information scraped from three sources: ministers from the [Wikipedia list](https://fr.wikipedia.org/wiki/Liste_des_gouvernements_de_la_France) of French governments, deputies from [Sycomore](https://www2.assemblee-nationale.fr/sycomore/liste/26), the Assemblée nationale’s database, and senators from [official lists](https://www.senat.fr/senateurs-3eme-republique/senatl.html) published by the Sénat.
