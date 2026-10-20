@@ -1,5 +1,5 @@
 # Generated SQLite database
-/decidon_app/db_build/prosopography.db
+/decidon_database/prosopography.db
 
 # SQLite temporary files
 *.db-journal
