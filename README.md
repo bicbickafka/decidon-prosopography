@@ -22,7 +22,7 @@ Understanding how information circulates between Parliament and the press requir
 ├── decidon_nel/        # Named Entity Linking module
 │   ├── api/            # FastAPI search application
 │   ├── front-end/      # Web interface
-│   └── index/          # Whoosh search index and pipeline scripts
+│   └── index/          # Whoosh search index
 ├── decidon_scraping/
 │   ├── output/         # Scraping outputs and validation reports
 │   └── scripts/        # Data scraping, merging, and validation scripts
