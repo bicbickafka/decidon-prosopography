@@ -1,10 +1,10 @@
 # Data Scraping, Merging, and Validation
 
 <p align="center" style="margin-top: 30px;">
-  <img src="./workflow.jpg" width="400" alt="journal_officiel">
+  <img src="../workflow.jpg" width="400" alt="workflow">
   <br>
   <em>
-    Figure 1. Verbatim records of parliamentary debates published in the Journal officiel.
+    Figure 1. Workflow from data scraping to database creation.
     Source: <a href="https://gallica.bnf.fr/ark:/12148/bpt6k64574218/f1.item">Gallica</a>.
   </em>
 </p>
