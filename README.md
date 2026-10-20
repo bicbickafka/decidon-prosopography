@@ -11,7 +11,6 @@ Understanding how information circulates between Parliament and the press requir
 <p align="center">
   <img src="docs/journal_officiel.jpg" width="400" alt="journal_officiel">
   <br>
-  <br><br>
   <em>
     Figure 1. Verbatim records of parliamentary debates published in the Journal officiel.
     Source: <a href="https://gallica.bnf.fr/ark:/12148/bpt6k64574218/f1.item">Gallica</a>.
