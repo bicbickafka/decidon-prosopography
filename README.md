@@ -19,7 +19,7 @@ Understanding how information circulates between Parliament and the press requir
 
 ```text
 ├── decidon_database/   # SQLite database build scripts
-├── decidon_nel/        # Named Entity Linking module
+├── decidon_nel/        
 │   ├── api/            # FastAPI search application
 │   ├── front-end/      # Web interface
 │   └── index/          # Whoosh search index
