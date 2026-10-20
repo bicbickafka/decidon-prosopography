@@ -1,7 +1,7 @@
 # A Database of Office Holders of the French Third Republic to Study Agenda-Setting Dynamics
 
 This repository contains the code used to build a prosopographic database of ministers, deputies, and senators of the French Third Republic (1870–1940). 
-It also provides a FastAPI search application backed by a Whoosh index, enabling retrieval of database records for Named Entity Linking.
+It also includes a FastAPI search application and a Whoosh search index for retrieving records from the database.
 
 The database was developed for DECIDON, a research project studying how Parliament and the press influence each other's allocation of attention to policy issues, a process known as agenda-setting.
 Understanding how information circulates between Parliament and the press requires structured records of office holders: who they are and, in particular, what position they hold when they speak or are spoken about. The prosopographic SQLite database was created to meet this need.
