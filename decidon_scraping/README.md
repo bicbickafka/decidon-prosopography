@@ -1,6 +1,6 @@
 # Data Scraping, Merging, and Validation
 
-<br><br>
+<br>
 
 <p align="center">
   <img src="../docs/workflow.jpg" width="900" alt="workflow">
