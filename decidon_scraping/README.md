@@ -1,7 +1,9 @@
 # Data Scraping, Merging, and Validation
 
+<br><br>
+
 <p align="center">
-  <img src="../docs/workflow.jpg" width="800" alt="workflow">
+  <img src="../docs/workflow.jpg" width="900" alt="workflow">
   <br>
   <em>
     Figure 1. Workflow from data scraping to database creation.
