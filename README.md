@@ -6,7 +6,7 @@ It also includes a FastAPI search application and a Whoosh search index for retr
 The database was developed for DECIDON, a research project studying how Parliament and the press influence each other's allocation of attention to policy issues, a process known as agenda-setting.
 Understanding how information circulates between Parliament and the press requires structured records of office holders: who they are and, in particular, what position they hold when they speak or are spoken about.
 
-<div style="height: 5px;"></div>
+<div style="height: 20px;"></div>
 
 <p align="center">
   <img src="docs/journal_officiel.jpg" width="400" alt="journal_officiel">
