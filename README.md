@@ -4,7 +4,7 @@ This repository contains the code used to build a prosopographic database of min
 It also includes a FastAPI search application and a Whoosh search index for retrieving records from the database.
 
 The database was developed for DECIDON, a research project studying how Parliament and the press influence each other's allocation of attention to policy issues, a process known as agenda-setting.
-Understanding how information circulates between Parliament and the press requires structured records of office holders: who they are and, in particular, what position they hold when they speak or are spoken about. The prosopographic database was created to meet this need.
+Tracking how information circulates between Parliament and the press requires structured records of office holders: who they were and, in particular, what position they held when speaking or being spoken about. This database was created to fulfill that need.
 
 ## Repository Structure
 
