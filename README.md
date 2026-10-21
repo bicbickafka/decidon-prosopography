@@ -6,15 +6,6 @@ It also includes a FastAPI search application and a Whoosh search index for retr
 The database was developed for DECIDON, a research project studying how Parliament and the press influence each other's allocation of attention to policy issues, a process known as agenda-setting.
 Understanding how information circulates between Parliament and the press requires structured records of office holders: who they are and, in particular, what position they hold when they speak or are spoken about. The prosopographic database was created to meet this need.
 
-<p align="center" style="margin-top: 30px;">
-  <img src="docs/journal_officiel.jpg" width="400" alt="journal_officiel">
-  <br>
-  <em>
-    Figure 1. Verbatim records of parliamentary debates published in the Journal officiel.
-    Source: <a href="https://gallica.bnf.fr/ark:/12148/bpt6k64574218/f1.item">Gallica</a>.
-  </em>
-</p>
-
 ## Repository Structure
 
 ```text
