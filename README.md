@@ -3,7 +3,7 @@
 This repository contains the code used to build a prosopographic database of ministers, deputies, and senators of the French Third Republic (1870–1940). 
 It also includes a FastAPI search application and a Whoosh search index for retrieving records from the database.
 
-The database was developed for DECIDON, a research project studying how Parliament and the press influence each other's allocation of attention to policy issues, a process known as agenda-setting.
+The database was developed as part of DECIDON, a research project studying how Parliament and the press shape one another’s attention to policy issues—a process known as agenda-setting.
 Tracking how information circulates between Parliament and the press requires structured records of office holders: who they were and, in particular, what position they held when speaking or being spoken about. This database was created to fulfill that need.
 
 ## Repository Structure
