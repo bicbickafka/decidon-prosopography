@@ -230,8 +230,6 @@ Once the application is running, interactive API documentation is available at:
 
 The OpenAPI specification is available at <http://127.0.0.1:8000/api/openapi.json>.
 
-#### Main Endpoints
-
 | Method | Endpoint | Description |
 |---|---|---|
 | `GET` | `/persons` | Search biographical records by first and last name, with pagination |
