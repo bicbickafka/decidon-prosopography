@@ -6,14 +6,12 @@ The database was developed as part of DECIDON, a research project studying how P
 
 ## Contents
 
-[Repository structure](#repository-structure)<br>
-[Installation](#installation)<br>
-[Database construction](#database-construction)<br>
-[Search application](#search-application)<br>
-[Data sources and processing](#data-sources-and-processing)<br>
-[Database schema](#database-schema)<br>
-[Named entity linking](#named-entity-linking)<br>
-[Scope and limitations](#scope-and-limitations)
+1. [Repository structure](#repository-structure)<br>
+2. [Installation](#installation)<br>
+3. Data scraping, merging, and validation
+4. Database creation and schema
+5. FastAPI Search Application
+6. Whoosh Search Index
 
 ## Repository structure
 
