@@ -1,6 +1,6 @@
 # DECIDON: A prosopographic database of office holders of the French Third Republic (1870–1940).
 
-This repository contains the code used to scrape online records of deputies, senators, and ministers and structure them into a SQLite database. It also includes a FastAPI search application and Whoosh-based search tools for retrieving records and supporting named entity linking.
+This repository contains the code used to scrape online records of deputies, senators, and ministers and build a SQLite database from them. It also includes a FastAPI search application and Whoosh-based search tools for retrieving records and supporting named entity linking.
 
 The database was developed as part of DECIDON, a research project studying how Parliament and the press shape one another’s attention to policy issues—a process known as agenda-setting. Tracking information across these sources requires structured records of political actors: who they were and, in particular, which positions they held when speaking or being spoken about.
 
