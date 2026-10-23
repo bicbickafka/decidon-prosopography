@@ -84,6 +84,51 @@ On Windows PowerShell:
 python -m pip install -r requirements.txt
 ```
 
+## Data sources and processing
+
+<p align="center">
+  <img src="docs/workflow.jpg" width="900" alt="Workflow from source scraping through merging and validation to database creation">
+  <br>
+  <em>Figure 1. Workflow from data scraping to database creation.</em>
+</p>
+
+### Sources
+
+The dataset draws on three main sources, each corresponding to a category of office holders:
+
+| Source | Coverage | Script |
+|---|---|---|
+| [Sycomore](https://www2.assemblee-nationale.fr/sycomore/recherche) | Deputies | `deputies.py` |
+| [Sénat historical directory](https://www.senat.fr/senateurs-3eme-republique/senatl.html) | Senators | `senators.py` |
+| [French Wikipedia articles on government compositions](https://fr.wikipedia.org/wiki/Liste_des_gouvernements_de_la_France) | Ministers | `ministers.py` |
+
+Data were scraped in March 2026. The scripts extract biographical information and detailed records of political appointments.
+
+They also retrieve Wikidata QIDs using the Sénat and Sycomore identifiers recorded on Wikidata, or through Wikipedia articles in the case of ministers.
+
+### Merging
+
+`decidon_scraping/scripts/merge.py` combines the three source-specific CSV files into a common TSV dataset.
+
+This step preserves source values and represents unavailable fields as empty values. Deduplication and person-record consolidation are handled during database construction.
+
+The merged dataset is stored at:
+
+```text
+decidon_scraping/output/prosopography.tsv
+```
+
+### Validation
+
+`decidon_scraping/scripts/validate.py` produces two reports:
+
+| Report | Contents |
+|---|---|
+| `validation_summary.tsv` | Record counts, field-completeness percentages by institution, and summaries of detected anomalies |
+| `validation_issues.tsv` | Potential anomalies in record structure and individual attribute values |
+
+The reports distinguish errors from warnings. Warnings flag cases requiring interpretation checks and do not necessarily indicate incorrect data.
+
 ## Database construction
 
 The merged source dataset is located at:
@@ -177,51 +222,6 @@ The earlier application documentation used the following documentation paths:
 - ReDoc: `http://127.0.0.1:8000/api/redoc`
 
 Check that these paths are still configured in the current application.
-
-## Data sources and processing
-
-<p align="center">
-  <img src="docs/workflow.jpg" width="900" alt="Workflow from source scraping through merging and validation to database creation">
-  <br>
-  <em>Figure 1. Workflow from data scraping to database creation.</em>
-</p>
-
-### Sources
-
-The dataset draws on three main sources, each corresponding to a category of office holders:
-
-| Source | Coverage | Script |
-|---|---|---|
-| [Sycomore](https://www2.assemblee-nationale.fr/sycomore/recherche) | Deputies | `deputies.py` |
-| [Sénat historical directory](https://www.senat.fr/senateurs-3eme-republique/senatl.html) | Senators | `senators.py` |
-| [French Wikipedia articles on government compositions](https://fr.wikipedia.org/wiki/Liste_des_gouvernements_de_la_France) | Ministers | `ministers.py` |
-
-Data were scraped in March 2026. The scripts extract biographical information and detailed records of political appointments.
-
-They also retrieve Wikidata QIDs using the Sénat and Sycomore identifiers recorded on Wikidata, or through Wikipedia articles in the case of ministers.
-
-### Merging
-
-`decidon_scraping/scripts/merge.py` combines the three source-specific CSV files into a common TSV dataset.
-
-This step preserves source values and represents unavailable fields as empty values. Deduplication and person-record consolidation are handled during database construction.
-
-The merged dataset is stored at:
-
-```text
-decidon_scraping/output/prosopography.tsv
-```
-
-### Validation
-
-`decidon_scraping/scripts/validate.py` produces two reports:
-
-| Report | Contents |
-|---|---|
-| `validation_summary.tsv` | Record counts, field-completeness percentages by institution, and summaries of detected anomalies |
-| `validation_issues.tsv` | Potential anomalies in record structure and individual attribute values |
-
-The reports distinguish errors from warnings. Warnings flag cases requiring interpretation checks and do not necessarily indicate incorrect data.
 
 ## Database schema
 
