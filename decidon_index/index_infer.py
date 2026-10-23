@@ -79,7 +79,7 @@ warnings.filterwarnings(
 
 
 BASE_DIR = Path(__file__).resolve().parent
-DB_PATH = BASE_DIR.parent / "db" / "data" / "prosopography.db"
+DB_PATH = BASE_DIR.parent / "decidon_database" / "prosopography.db"
 INDEX_DIR = BASE_DIR / "indexdir"
 
 BM25_K1 = 1.5

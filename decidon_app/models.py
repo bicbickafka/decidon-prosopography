@@ -13,8 +13,7 @@ from datetime import date
 from sqlalchemy import String, Integer, Float, ForeignKey, Enum
 from sqlalchemy.orm import Mapped, mapped_column, relationship, declared_attr, Session
 
-from app.database import Base
-
+from .database import Base
 
 ###########################################################
 # ~~~~~~~~~~~~~~~~~~~ > ID utilities < ~~~~~~~~~~~~~~~~~~ #

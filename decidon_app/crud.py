@@ -12,8 +12,6 @@ from typing import Any, Optional
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 
-from app.index import DecidonSearchEngine
-
 DEFAULT_START = "1870-01-01"
 DEFAULT_END = "1940-07-10"
 
@@ -450,11 +448,3 @@ def lookup_logic(db: Session, q: str, limit: int) -> list[dict[str, Any]]:
             {"q": f"%{q_norm}%", "limit": limit},
         ).mappings().all()
     ]
-
-
-def match_mention_logic(db, text_value: str, session_date=None, limit: int = 5):
-    engine = DecidonSearchEngine()
-    try:
-        return engine.search(query_str=text_value, session_date=session_date, limit=limit)
-    finally:
-        engine.close()

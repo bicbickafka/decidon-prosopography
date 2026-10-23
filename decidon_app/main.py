@@ -5,8 +5,8 @@ Entry point for the FastAPI application.
 """
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routes import api_router
-from app.api_meta import METADATA
+from .routes import api_router
+from .api_meta import METADATA
 from fastapi.openapi.utils import get_openapi
 
 

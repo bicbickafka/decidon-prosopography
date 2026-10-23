@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, event
 from sqlalchemy.orm import sessionmaker, scoped_session, declarative_base
-from app.config import settings
+from .config import settings
 
 engine = create_engine(settings.DB_URI, connect_args={"check_same_thread": False})
 

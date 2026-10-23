@@ -7,8 +7,7 @@ from typing import Optional
 
 from pydantic import BaseModel, ConfigDict, Field
 
-from app.models import InstitutionType
-
+from .models import InstitutionType
 
 class MandateEntityOut(BaseModel):
     mandate_id: str
