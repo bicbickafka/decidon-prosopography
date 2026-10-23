@@ -6,13 +6,13 @@ The database was developed as part of DECIDON, a research project studying how P
 
 ## Contents
 
-[Repository structure](#repository-structure)
-[Installation](#installation)
-[Database construction](#database-construction)
-[Search application](#search-application)
-[Data sources and processing](#data-sources-and-processing)
-[Database schema](#database-schema)
-[Named entity linking](#named-entity-linking)
+[Repository structure](#repository-structure)<br>
+[Installation](#installation)<br>
+[Database construction](#database-construction)<br>
+[Search application](#search-application)<br>
+[Data sources and processing](#data-sources-and-processing)<br>
+[Database schema](#database-schema)<br>
+[Named entity linking](#named-entity-linking)<br>
 [Scope and limitations](#scope-and-limitations)
 
 ## Repository structure
