@@ -59,7 +59,7 @@ The database was developed as part of DECIDON, a research project studying how P
 
 Run the following commands from the repository root.
 
-### 1. Create a Virtual Environment
+### Create a Virtual Environment
 
 ```bash
 python3 -m venv .venv
@@ -77,7 +77,7 @@ Or on Windows PowerShell:
 .\.venv\Scripts\Activate.ps1
 ```
 
-### 2. Install Dependencies
+### Install Dependencies
 
 ```bash
 python -m pip install -r requirements.txt
