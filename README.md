@@ -84,7 +84,7 @@ On Windows PowerShell:
 python -m pip install -r requirements.txt
 ```
 
-## Data sources and processing
+## Data scraping, merging, and validation
 
 <p align="center">
   <img src="docs/workflow.jpg" width="900" alt="Workflow from source scraping through merging and validation to database creation">
@@ -92,7 +92,7 @@ python -m pip install -r requirements.txt
   <em>Figure 1. Workflow from data scraping to database creation.</em>
 </p>
 
-### Sources
+### Data scraping
 
 The dataset draws on three main sources, each corresponding to a category of office holders:
 
@@ -106,7 +106,7 @@ Data were scraped in March 2026. The scripts extract biographical information an
 
 They also retrieve Wikidata QIDs using the Sénat and Sycomore identifiers recorded on Wikidata, or through Wikipedia articles in the case of ministers.
 
-### Merging
+### Data merging
 
 `decidon_scraping/scripts/merge.py` combines the three source-specific CSV files into a common TSV dataset.
 
@@ -118,7 +118,7 @@ The merged dataset is stored at:
 decidon_scraping/output/prosopography.tsv
 ```
 
-### Validation
+### Data validation
 
 `decidon_scraping/scripts/validate.py` produces two reports:
 
