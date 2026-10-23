@@ -26,7 +26,7 @@ Tracking how information circulates between Parliament and the press requires st
 <br>
 
 <p align="center">
-  <img src="../docs/workflow.jpg" width="900" alt="workflow">
+  <img src="docs/workflow.jpg" width="900" alt="workflow">
   <br>
   <em>
     Figure 1. Workflow from data scraping to database creation.
