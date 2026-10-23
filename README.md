@@ -36,7 +36,7 @@ Because individuals frequently held multiple offices, the same person may appear
 
 ### Database Schema
 
-The schema is made up of three tables: person, mandate and person_mandate (Figure 2). The person table stores biographical information: first and last name, alias, dates of birth and death, and source identifiers. The mandate table records institutional entities: the institution (Gouvernement, Chambre or Sénat), name,  start and end dates, and Wikipedia and Wikidata identifiers. The junction table person_mandate links individuals to these entities. It records the person's position, constituency, political party, tenure dates, and any additional roles (such as president or stenographer).
+The schema is made up of three tables: `person`, `mandate` and `person_mandate` (Figure 2). The `person` table stores biographical information: first and last name, alias, dates of birth and death, and source identifiers. The `mandate` table records institutional entities: the institution (Gouvernement, Chambre or Sénat), name,  start and end dates, and Wikipedia and Wikidata identifiers. The junction table `person_mandate` links individuals to these entities. It records the person's position, constituency, political party, tenure dates, and any additional roles (such as president or stenographer).
 
 <p align="center">
   <img src="docs/db_diagram.jpg" width="750" alt="db_diagram">
