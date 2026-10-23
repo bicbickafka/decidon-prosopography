@@ -1,4 +1,4 @@
-# DECIDON Prosopography
+# DECIDON
 
 A prosopographic database and search toolkit for office holders of the French Third Republic (1870–1940).
 
