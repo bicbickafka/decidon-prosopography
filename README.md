@@ -1,199 +1,156 @@
-# DECIDON Prosopography
+# DECIDON: Office Holders of the French Third Republic
 
-A prosopographic database and search application for office holders of the French Third Republic (1870–1940).
+A prosopographic database of ministers, deputies, and senators of the French Third Republic (1870–1940), with a FastAPI search application and a Whoosh index for Named Entity Linking.
 
-The repository builds a structured database of deputies, senators, and ministers, then provides a FastAPI application and Whoosh-based search index for retrieving and linking person records. It was developed as part of **DECIDON**, a research project on agenda-setting dynamics between the French Parliament and the press.
+Built for **DECIDON**, a research project on agenda-setting: how Parliament and the press shape one another's attention to policy issues. Tracking that circulation requires structured records of who office holders were and, above all, what position they held when speaking or being spoken about.
 
-## Overview
+**Contents:** [Sources](#sources) · [Stack](#stack) · [Project structure](#project-structure) · [Installation](#installation) · [Data pipeline](#data-pipeline) · [Database](#database) · [Search and NEL](#search-and-named-entity-linking) · [API](#api)
 
-Tracking how policy attention circulates between Parliament and the press requires reliable records of political actors: who they were, which offices they held, and when those offices began and ended.
+## Sources
 
-This repository addresses that need by:
-
-- scraping and normalizing biographical and career data from Sycomore, the Sénat’s historical directory, and French Wikipedia;
-- consolidating records for individuals who appear in more than one source;
-- storing persons, mandates, and appointments in a relational SQLite database;
-- exposing the data through a FastAPI search application;
-- supporting named entity linking through a Whoosh index with date- and role-aware retrieval.
-
-## Main features
-
-| Component | Description |
+| Category | Source |
 |---|---|
-| Data pipeline | Scripts for scraping, merging, validating, and migrating source data |
-| SQLite database | Relational database of persons, institutional mandates, and appointments |
-| Search API | FastAPI + SQLAlchemy interface for querying persons and mandates |
-| Entity linking | Whoosh index supporting name, date, office, constituency, and party-based retrieval |
-| Validation | Reports on field completeness, structural anomalies, and potential data issues |
+| Deputies | [Sycomore](https://www2.assemblee-nationale.fr/sycomore/) (Assemblée nationale) |
+| Senators | Sénat historical directory |
+| Ministers | French Wikipedia articles on government compositions |
+| Identifiers | Wikidata (QIDs retrieved via Sénat/Sycomore IDs or Wikipedia articles) |
 
-## Installation
+Data were scraped in March 2026.
 
-### Prerequisites
+## Stack
 
-- Python 3.10 or later
-- pip
-
-### Create a virtual environment
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate  # macOS / Linux
-# .\.venv\Scripts\activate  # Windows
-```
-
-### Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-## Database construction
-
-### 1. Add the source data
-
-Place the merged source file at:
-
-```text
-db/data/prosopography.tsv
-```
-
-### 2. Run the migration
-
-```bash
-python3 db/run_migration.py
-```
-
-This creates:
-
-```text
-db/data/prosopography.db
-```
-
-## Launch the application
-
-From the repository root:
-
-```bash
-uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
-```
-
-The application is then available at:
-
-- Web interface: <http://127.0.0.1:8000>
-- Swagger UI: <http://127.0.0.1:8000/api/docs>
-- ReDoc: <http://127.0.0.1:8000/api/redoc>
-
-## API endpoints
-
-| Method | Endpoint | Description |
-|---|---|---|
-| `GET` | `/persons` | List or search persons |
-| `GET` | `/persons/{person_id}` | Retrieve a person by identifier |
-| `GET` | `/persons/grouped-mandates` | Search persons with grouped mandates |
-| `GET` | `/persons/by-role` | Retrieve persons holding a role on a given date |
-| `GET` | `/legislatures` | List legislatures |
-| `GET` | `/legislatures/{id}/members` | Retrieve members of a legislature |
-| `GET` | `/lookup` | Fuzzy name lookup |
+| Layer | Technology |
+|---|---|
+| Database | SQLite (3 tables: `person`, `mandate`, `person_mandate`) |
+| ORM | SQLAlchemy |
+| API | FastAPI + Pydantic |
+| Search index | Whoosh (BM25) |
+| Frontend | Static HTML / CSS / JS served by FastAPI |
 
 ## Project structure
 
 ```text
 .
 ├── app/
-│   ├── main.py              # FastAPI application entry point
-│   ├── config.py            # Application settings
-│   ├── database.py          # SQLAlchemy engine and session
-│   ├── models.py            # ORM models
-│   ├── schemas.py           # Pydantic schemas
-│   ├── crud.py              # Database query logic
-│   ├── routes.py            # API routes
-│   ├── api_meta.py          # API metadata
-│   └── index.html           # Static frontend
+│   ├── main.py          # FastAPI entry point
+│   ├── config.py        # Settings (DB path, etc.)
+│   ├── database.py      # SQLAlchemy engine & session
+│   ├── models.py        # ORM models
+│   ├── schemas.py       # Pydantic schemas
+│   ├── crud.py          # Query logic
+│   ├── routes.py        # API routes
+│   ├── api_meta.py      # API metadata
+│   └── index.html       # Frontend (served at /)
 ├── db/
 │   ├── data/
-│   │   ├── prosopography.tsv
-│   │   └── prosopography.db
-│   └── run_migration.py
-├── deputies.py
-├── senators.py
-├── ministers.py
-├── merge.py
-├── validate.py
-├── docs/
+│   │   ├── prosopography.tsv   # Merged source data
+│   │   └── prosopography.db    # Generated database
+│   └── run_migration.py        # Migration script
+├── deputies.py  senators.py  ministers.py   # Scrapers
+├── merge.py  validate.py                    # Merging and validation
+├── docs/                                    # Figures
 └── requirements.txt
 ```
 
-## Data sources
+<!-- Adjust to match the actual layout, including where the Whoosh index and NEL code live. -->
 
-| Source | Used for |
+## Installation
+
+Requires Python 3.10+.
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate        # Windows: .\.venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+### Build the database
+
+Place the merged source file at `db/data/prosopography.tsv`, then run:
+
+```bash
+python3 db/run_migration.py
+```
+
+This creates `db/data/prosopography.db`.
+
+### Launch the app
+
+From the project root:
+
+```bash
+uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+The app is served at <http://127.0.0.1:8000>. Interactive docs: [Swagger UI](http://127.0.0.1:8000/api/docs) · [ReDoc](http://127.0.0.1:8000/api/redoc).
+
+## Data pipeline
+
+<p align="center">
+<img src="docs/workflow.jpg" width="900" alt="workflow">
+<br><em>Figure 1. Workflow from data scraping to database creation.</em>
+</p>
+
+**Scraping.** `deputies.py`, `senators.py` and `ministers.py` extract biographical information and detailed records of political appointments, plus Wikidata QIDs.
+
+**Merging.** `merge.py` combines the three CSV files into one TSV. Source values are preserved and unavailable fields left empty; deduplication happens at migration.
+
+**Validation.** `validate.py` writes two reports:
+- `validation_summary.tsv`: counts and field completeness per institution (Gouvernement, Chambre, Sénat), plus detected anomalies.
+- `validation_issues.tsv`: potential anomalies in structure and attribute values. Errors and warnings are distinguished; warnings flag cases needing interpretation, not necessarily wrong data.
+
+**Consolidation.** `run_migration.py` merges records into one person entity using a deterministic key: Wikidata QID, then Sénat ID, then Sycomore ID. Records with none of these are grouped by exact last name + first name + birth date.
+
+## Database
+
+<p align="center">
+<img src="docs/db_diagram.jpg" width="750" alt="db_diagram">
+<br><em>Figure 2. Schema.</em>
+</p>
+
+| Table | Content |
 |---|---|
-| [Sycomore](https://www2.assemblee-nationale.fr/sycomore/recherche) | Deputies of the Third Republic |
-| [Sénat historical directory](https://www.senat.fr/senateurs-3eme-republique/senatl.html) | Senators of the Third Republic |
-| [French Wikipedia government lists](https://fr.wikipedia.org/wiki/Liste_des_gouvernements_de_la_France) | Ministers and government compositions |
-| Wikidata | Persistent identifiers and cross-source matching |
+| `person` | Names, alias, birth/death dates, source identifiers |
+| `mandate` | Institutional entities: institution (Gouvernement, Chambre, Sénat), name, dates, Wikipedia/Wikidata IDs |
+| `person_mandate` | Links people to mandates: position, constituency, party, tenure dates, additional roles (e.g. president, stenographer) |
 
-Data were scraped in March 2026 using `deputies.py`, `senators.py`, and `ministers.py`. The scripts extract biographical information, political appointments, and Wikidata QIDs where available.
-
-## Data processing
-
-`merge.py` combines the source-specific CSV files into a common TSV file. Source values are preserved, and unavailable fields are left empty; deduplication and entity resolution occur during migration.
-
-`validate.py` generates two reports:
-
-- `validation_summary.tsv`: record counts, field-completeness rates by institution, and anomaly summaries;
-- `validation_issues.tsv`: potential structural and attribute-level issues, separated into errors and warnings.
-
-Warnings flag cases requiring manual interpretation; they do not necessarily indicate incorrect data.
-
-## Data model
-
-The database uses three main tables:
-
-| Table | Purpose |
-|---|---|
-| `person` | Biographical information and source identifiers |
-| `mandate` | Institutional entities: government, Chamber of Deputies, or Senate |
-| `person_mandate` | Links between persons and mandates, including role, constituency, party, and tenure dates |
-
-Because individuals may hold several offices—sometimes simultaneously—the same person can be linked to multiple mandates. For example, Léon Gambetta served both as Minister of the Interior and as a deputy in February 1871.
+Appointment-specific attributes live in `person_mandate`, so biographies are never duplicated and careers can be followed across institutions.
 
 <p align="center">
-  <img src="docs/db_diagram.jpg" width="750" alt="Database schema">
-  <br>
-  <em>Figure 1. Database schema.</em>
+<img src="docs/db_record_count.jpg" width="750" alt="db_record_count">
+<br><em>Figure 3. Record count: 5,792 persons, 16,941 appointments, 149 institutional entities.</em>
 </p>
 
-The database contains:
+## Search and Named Entity Linking
 
-- 5,792 persons;
-- 16,941 person–mandate links;
-- 149 institutional mandates.
+The database supports NEL by matching entity mentions extracted from the *Journal officiel* and press corpora against its records. A Whoosh index covers names, active mandate dates, offices, constituencies and political affiliations.
+
+Queries use a tiered fallback (exact → boolean AND → strong tokens → boolean OR), moving down a tier only when the previous one returns no candidates. Candidates are scored with BM25 and restricted by session or article date.
 
 <p align="center">
-  <img src="docs/db_record_count.jpg" width="750" alt="Database record counts">
-  <br>
-  <em>Figure 2. Record counts.</em>
+<img src="docs/nel_fallback_pipeline.jpg" width="900" alt="nel_fallback_pipeline">
+<br><em>Figure 4. Whoosh query fallback pipeline with BM25 scoring.</em>
 </p>
 
-## Entity linking
-
-The Whoosh index supports named entity linking by matching mentions extracted from the *Journal officiel* and press corpora against database records. Indexed attributes include names, active mandate dates, offices, constituencies, and political affiliations.
-
-Queries use a tiered fallback strategy:
-
-1. exact matching;
-2. boolean `AND`;
-3. strong token matching;
-4. boolean `OR`.
-
-Candidates are scored with BM25 and constrained by session or article date. Results are then grouped at the person level to handle homonyms, title-only references, and overlapping concurrent mandates.
+Results are aggregated per person (`group_results_by_person`) to resolve homonyms, title-only references and concurrent mandates, such as Gambetta being both Minister of the Interior and deputy in February 1871.
 
 <p align="center">
-  <img src="docs/nel_fallback_pipeline.jpg" width="900" alt="Entity-linking fallback pipeline">
-  <br>
-  <em>Figure 3. Whoosh query fallback pipeline with BM25 scoring.</em>
+<img src="docs/db_gambetta.jpg" width="900" alt="db_gambetta">
+<br><em>Figure 5. Léon Gambetta's overlapping mandates, February 1871.</em>
 </p>
 
-## License
+## API
 
-Add license information here.
+The search route accepts combinable parameters (name, date constraints, office type) and returns structured person and mandate records.
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/persons` | List or search persons |
+| GET | `/persons/{person_id}` | Get a person by ID |
+| GET | `/persons/grouped-mandates` | Search persons with grouped mandates |
+| GET | `/persons/by-role` | Persons holding a role at a given date |
+| GET | `/legislatures` | List legislatures |
+| GET | `/legislatures/{id}/members` | Members of a legislature |
+| GET | `/lookup` | Fuzzy name lookup |
+
+<!-- Verify against routes.py: the endpoints above come from the original README and still use "legislatures". -->
