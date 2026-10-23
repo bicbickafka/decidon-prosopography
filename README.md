@@ -1,6 +1,6 @@
 # DECIDON: A prosopographic database of office holders of the French Third Republic (1870–1940).
 
-This repository contains the code used to scrape online records of deputies, senators, and ministers of the French Third Republic (1870–1940) and build a SQLite database from them. It also includes a FastAPI search application and Whoosh-based search tools for retrieving records and supporting named entity linking.
+This repository contains the code used to scrape online records of deputies, senators, and ministers of the French Third Republic (1870–1940) and build a SQLite database from them. It also includes a FastAPI search application and Whoosh-based search index for retrieving records and supporting named entity linking.
 
 The database was developed as part of DECIDON, a research project studying how Parliament and the press shaped one another’s attention to policy issues—a process known as agenda-setting. Tracking information across these sources requires structured records of political actors: who they were and, in particular, which positions they held when speaking or being spoken about.
 
@@ -129,7 +129,19 @@ decidon_scraping/output/prosopography.tsv
 
 The reports distinguish errors from warnings. Warnings flag cases requiring interpretation checks and do not necessarily indicate incorrect data.
 
-## Database construction
+## Database creation and schema
+
+### Database creation
+
+Individuals frequently held offices in more than one institution. The same person may therefore appear as a deputy in Sycomore, a senator in the Sénat directory, and a minister on Wikipedia.
+
+During migration, records are consolidated using a deterministic person key. The key uses the first available identifier in the following order:
+
+1. Wikidata QID;
+2. Sénat identifier;
+3. Sycomore identifier.
+
+Records without any of these identifiers are grouped using an exact combination of last name, first name, and birth date. Records with the same resulting key are represented by a single person entity.
 
 The merged source dataset is located at:
 
@@ -137,7 +149,7 @@ The merged source dataset is located at:
 decidon_scraping/output/prosopography.tsv
 ```
 
-The database construction script is located at:
+The database creation script is located at:
 
 ```text
 decidon_database/run_migration.py
@@ -157,19 +169,37 @@ python decidon_database/run_migration.py
 
 After migration, ensure that the API’s database configuration points to the generated SQLite file.
 
-### Record consolidation
+### Database schema
 
-Individuals frequently held offices in more than one institution. The same person may therefore appear as a deputy in Sycomore, a senator in the Sénat directory, and a minister on Wikipedia.
+The database separates biographical records, institutional entities, and individual appointments into three tables.
 
-During migration, records are consolidated using a deterministic person key. The key uses the first available identifier in the following order:
+| Table | Purpose | Main attributes |
+|---|---|---|
+| `person` | Individual office holders | First and last name, alias, birth and death dates, source identifiers |
+| `mandate` | Institutional entities, such as governments or legislatures | Institution, name, start and end dates, Wikipedia and Wikidata identifiers |
+| `person_mandate` | Appointments linking individuals to institutional entities | Position, constituency, political party, tenure dates, additional roles |
 
-1. Wikidata QID;
-2. Sénat identifier;
-3. Sycomore identifier.
+Institution values distinguish `Gouvernement`, `Chambre`, and `Sénat`.
 
-Records without any of these identifiers are grouped using an exact combination of last name, first name, and birth date. Records with the same resulting key are represented by a single person entity.
+<p align="center">
+  <img src="docs/db_diagram.jpg" width="750" alt="Database schema showing person, mandate, and person_mandate tables">
+  <br>
+  <em>Figure 2. Database schema.</em>
+</p>
 
-## Search application
+A person may hold several successive or simultaneous positions, while a government or legislature includes many people. The `person_mandate` junction table represents these relationships and stores attributes associated with a particular appointment rather than with the individual alone.
+
+This separation avoids duplicating biographical records for each institutional appearance and supports cross-institutional career tracking.
+
+<p align="center">
+  <img src="docs/db_record_count.jpg" width="750" alt="Record counts for the three database tables">
+  <br>
+  <em>Figure 3. Database record counts.</em>
+</p>
+
+SQLite provides a self-contained database file that can be queried directly, accessed through the API, or incorporated into other research workflows.
+
+## FastAPI Search Application
 
 The FastAPI application provides programmatic access to person and mandate records through SQLAlchemy. Search parameters include names, date constraints, and office types such as deputy, senator, and minister.
 
@@ -223,39 +253,7 @@ The earlier application documentation used the following documentation paths:
 
 Check that these paths are still configured in the current application.
 
-## Database schema
-
-The database separates biographical records, institutional entities, and individual appointments into three tables.
-
-| Table | Purpose | Main attributes |
-|---|---|---|
-| `person` | Individual office holders | First and last name, alias, birth and death dates, source identifiers |
-| `mandate` | Institutional entities, such as governments or legislatures | Institution, name, start and end dates, Wikipedia and Wikidata identifiers |
-| `person_mandate` | Appointments linking individuals to institutional entities | Position, constituency, political party, tenure dates, additional roles |
-
-Institution values distinguish `Gouvernement`, `Chambre`, and `Sénat`.
-
-<p align="center">
-  <img src="docs/db_diagram.jpg" width="750" alt="Database schema showing person, mandate, and person_mandate tables">
-  <br>
-  <em>Figure 2. Database schema.</em>
-</p>
-
-A person may hold several successive or simultaneous positions, while a government or legislature includes many people. The `person_mandate` junction table represents these relationships and stores attributes associated with a particular appointment rather than with the individual alone.
-
-This separation avoids duplicating biographical records for each institutional appearance and supports cross-institutional career tracking.
-
-<p align="center">
-  <img src="docs/db_record_count.jpg" width="750" alt="Record counts for the three database tables">
-  <br>
-  <em>Figure 3. Database record counts.</em>
-</p>
-
-SQLite provides a self-contained database file that can be queried directly, accessed through the API, or incorporated into other research workflows.
-
-## Named entity linking
-
-### Whoosh search index
+## Whoosh Search Index
 
 The search tools support named entity linking by retrieving candidate records for mentions extracted from the *Journal officiel* and press corpora.
 
@@ -281,19 +279,3 @@ Each subsequent tier is attempted when the preceding tier returns no candidates.
   <br>
   <em>Figure 4. Whoosh query fallback pipeline with BM25 scoring.</em>
 </p>
-
-### Person-level aggregation
-
-Search results are aggregated at the person level using `group_results_by_person`. This brings together appointments belonging to the same individual and supports the interpretation of homonyms, title-only references, and concurrent offices.
-
-For example, Léon Gambetta’s records illustrate overlapping service as Minister of the Interior and deputy in February 1871.
-
-<p align="center">
-  <img src="docs/db_gambetta.jpg" width="900" alt="Relational records for Léon Gambetta showing overlapping government and parliamentary appointments">
-  <br>
-  <em>Figure 5. Relational records for Léon Gambetta during February 1871.</em>
-</p>
-
-Person-level aggregation does not, by itself, establish that a mention has been correctly disambiguated. Candidate selection still depends on the available name, date, office, and contextual information.
-
-Once mentions are linked, records can be filtered and aggregated across individuals, appointments, institutions, or political parties.
