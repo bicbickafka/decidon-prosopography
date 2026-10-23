@@ -1,19 +1,19 @@
-# DECIDON: A PROSOPOGRAPHIC DATABASE OF OFFICE HOLDERS OF THE FRENCH THIRD REPUBLIC (1870–1940)
+# DECIDON: A Prosopographic Database of Office Holders of the French Third Republic (1870–1940)
 
 This repository contains the code used to scrape online records of deputies, senators, and ministers of the French Third Republic and build a SQLite database from them. It also includes a FastAPI search application and a Whoosh-based search index for retrieving records and supporting named entity linking.
 
 The database was developed as part of DECIDON, a research project studying how Parliament and the press shaped one another’s attention to policy issues—a process known as agenda-setting. Tracking information across these sources requires structured records of political actors: who they were and, in particular, which positions they held when speaking or being spoken about.
 
-## CONTENTS
+## Contents
 
-1. [Repository structure](#repository-structure)
+1. [Repository Structure](#repository-structure)
 2. [Installation](#installation)
-3. [Data scraping, merging, and validation](#data-scraping-merging-and-validation)
-4. [Database creation and schema](#database-creation-and-schema)
-5. [FastAPI search application](#fastapi-search-application)
-6. [Whoosh search index](#whoosh-search-index)
+3. [Data Scraping, Merging, and Validation](#data-scraping-merging-and-validation)
+4. [Database Creation and Schema](#database-creation-and-schema)
+5. [FastAPI Search Application](#fastapi-search-application)
+6. [Whoosh Search Index](#whoosh-search-index)
 
-## REPOSITORY STRUCTURE
+## Repository Structure
 
 ```text
 .
@@ -50,16 +50,16 @@ The database was developed as part of DECIDON, a research project studying how P
 └── requirements.txt
 ```
 
-## INSTALLATION
+## Installation
 
-### PREREQUISITES
+### Prerequisites
 
 - Python 3.10 or later
 - pip
 
 Run the following commands from the repository root.
 
-### 1. CREATE A VIRTUAL ENVIRONMENT
+### 1. Create a Virtual Environment
 
 ```bash
 python3 -m venv .venv
@@ -77,13 +77,13 @@ Or on Windows PowerShell:
 .\.venv\Scripts\Activate.ps1
 ```
 
-### 2. INSTALL DEPENDENCIES
+### 2. Install Dependencies
 
 ```bash
 python -m pip install -r requirements.txt
 ```
 
-## DATA SCRAPING, MERGING, AND VALIDATION
+## Data Scraping, Merging, and Validation
 
 <p align="center">
   <img src="docs/workflow.jpg" width="900" alt="Workflow from source scraping through merging and validation to database creation">
@@ -91,7 +91,7 @@ python -m pip install -r requirements.txt
   <em>Figure 1. Workflow from data scraping to database creation.</em>
 </p>
 
-### DATA SCRAPING
+### Data Scraping
 
 The dataset draws on three main sources, each corresponding to a category of office holders:
 
@@ -105,7 +105,7 @@ Data were scraped in March 2026. The scripts extract biographical information an
 
 They also retrieve Wikidata QIDs by matching Sénat and Sycomore identifiers recorded on Wikidata, or through Wikipedia articles in the case of ministers.
 
-### DATA MERGING
+### Data Merging
 
 `decidon_scraping/scripts/merge.py` combines the three source-specific CSV files into a common TSV dataset.
 
@@ -117,7 +117,7 @@ The merged dataset is stored at:
 decidon_scraping/output/prosopography.tsv
 ```
 
-### DATA VALIDATION
+### Data Validation
 
 `decidon_scraping/scripts/validate.py` produces two reports:
 
@@ -128,9 +128,9 @@ decidon_scraping/output/prosopography.tsv
 
 The reports distinguish errors from warnings. Warnings flag cases requiring interpretation checks and do not necessarily indicate incorrect data.
 
-## DATABASE CREATION AND SCHEMA
+## Database Creation and Schema
 
-### DATABASE CREATION
+### Database Creation
 
 Individuals frequently held offices in more than one institution. The same person may therefore appear as a deputy in Sycomore, a senator in the Sénat directory, and a minister on Wikipedia.
 
@@ -158,7 +158,7 @@ python decidon_database/run_migration.py
 
 After migration, ensure that the API’s database configuration points to the generated SQLite file.
 
-### DATABASE SCHEMA
+### Database Schema
 
 The database separates biographical records, institutional entities, and individual appointments into three tables:
 
@@ -188,7 +188,7 @@ This separation avoids duplicating biographical records for each institutional a
 
 SQLite provides a self-contained database file that can be queried directly, accessed through the API, or incorporated into other research workflows.
 
-## FASTAPI SEARCH APPLICATION
+## FastAPI Search Application
 
 The FastAPI application provides programmatic access to person and mandate records through SQLAlchemy. Search parameters include names, date constraints, and office types such as deputy, senator, and minister.
 
@@ -200,7 +200,7 @@ Before launching it:
 2. Check the database configuration in `decidon_app/config.py` and `decidon_app/database.py`.
 3. Check the import conventions in `decidon_app/main.py` to select the appropriate launch command below.
 
-### DEVELOPMENT SERVER
+### Development Server
 
 If the application uses package-relative imports, such as `from . import models`, launch it from the repository root:
 
@@ -221,7 +221,7 @@ The development server runs at:
 http://127.0.0.1:8000
 ```
 
-### API DOCUMENTATION
+### API Documentation
 
 Interactive API documentation is available through Swagger UI and ReDoc. Their URLs are configured in `decidon_app/main.py`.
 
@@ -232,7 +232,7 @@ If the original documentation paths have been retained, they are:
 
 See `decidon_app/routes.py` for the available endpoints and search parameters.
 
-## WHOOSH SEARCH INDEX
+## Whoosh Search Index
 
 The Whoosh search index supports named entity linking by retrieving candidate records for mentions extracted from the *Journal officiel* and press corpora.
 
