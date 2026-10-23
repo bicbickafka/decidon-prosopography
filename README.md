@@ -13,7 +13,7 @@ The database was developed as part of DECIDON, a research project studying how P
 5. [FastAPI Search Application](#fastapi-search-application)
 6. [Whoosh Search Index](#whoosh-search-index)
 
-## Repository Structure
+## 1. Repository Structure
 
 ```text
 .
@@ -50,7 +50,7 @@ The database was developed as part of DECIDON, a research project studying how P
 └── requirements.txt
 ```
 
-## Installation
+## 2. Installation
 
 ### Prerequisites
 
@@ -83,7 +83,7 @@ Or on Windows PowerShell:
 python -m pip install -r requirements.txt
 ```
 
-## Data Scraping, Merging, and Validation
+## 3. Data Scraping, Merging, and Validation
 
 <p align="center">
   <img src="docs/workflow.jpg" width="900" alt="Workflow from source scraping through merging and validation to database creation">
@@ -128,7 +128,7 @@ decidon_scraping/output/prosopography.tsv
 
 The reports distinguish errors from warnings. Warnings flag cases requiring interpretation checks and do not necessarily indicate incorrect data.
 
-## Database Creation and Schema
+## 4. Database Creation and Schema
 
 ### Database Creation
 
@@ -188,7 +188,7 @@ This separation avoids duplicating biographical records for each institutional a
 
 SQLite provides a self-contained database file that can be queried directly, accessed through the API, or incorporated into other research workflows.
 
-## FastAPI Search Application
+## 5. FastAPI Search Application
 
 The FastAPI application provides programmatic access to person and mandate records through SQLAlchemy. Search parameters include names, date constraints, and office types such as deputy, senator, and minister.
 
@@ -232,7 +232,7 @@ If the original documentation paths have been retained, they are:
 
 See `decidon_app/routes.py` for the available endpoints and search parameters.
 
-## Whoosh Search Index
+## 6. Whoosh Search Index
 
 The Whoosh search index supports named entity linking by retrieving candidate records for mentions extracted from the *Journal officiel* and press corpora.
 
