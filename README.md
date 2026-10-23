@@ -297,12 +297,3 @@ For example, Léon Gambetta’s records illustrate overlapping service as Minist
 Person-level aggregation does not, by itself, establish that a mention has been correctly disambiguated. Candidate selection still depends on the available name, date, office, and contextual information.
 
 Once mentions are linked, records can be filtered and aggregated across individuals, appointments, institutions, or political parties.
-
-## Scope and limitations
-
-- Source coverage and field completeness vary across institutions.
-- Empty fields represent unavailable values in the merged dataset.
-- Record consolidation relies on available identifiers and exact fallback keys; it is not a general fuzzy entity-resolution procedure.
-- Different identifiers or variations in names and dates can prevent records referring to the same person from receiving the same key.
-- Search results are candidates for entity linking, not independently validated identity assignments.
-- Validation warnings require interpretation and should not automatically be treated as errors.
