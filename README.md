@@ -84,7 +84,7 @@ The database supports Named Entity Linking (NEL) by querying extracted entity me
 To optimize recall and precision, queries follow a tiered fallback strategy (Figure 1): attempting exact matching first, then falling back sequentially to boolean AND, strong token matching, and boolean OR whenever previous tiers return no candidates. Matches across all tiers are scored using BM25 and restricted by session or article date. 
 
 <p align="center">
-  <img src="../../docs//nel_fallback_pipeline.jpg" width="900" alt="nel_fallback_pipeline.jpg">
+  <img src="docs//nel_fallback_pipeline.jpg" width="900" alt="nel_fallback_pipeline.jpg">
   <br>
   <em>
     Figure 1. Whoosh search query fallback pipeline with BM25 scoring.
