@@ -1,4 +1,4 @@
-# A prosopographic database of office holders of the French Third Republic (1870–1940), with tools for searching and linking records.
+# DECIDON: A prosopographic database of office holders of the French Third Republic (1870–1940).
 
 This repository contains the code used to scrape online records of deputies, senators, and ministers and structure them into a SQLite database. It also includes a FastAPI search application and Whoosh-based search tools for retrieving records and supporting named entity linking.
 
