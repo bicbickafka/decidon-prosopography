@@ -18,7 +18,6 @@ The database was developed as part of DECIDON, a research project studying how P
 ## Repository structure
 
 ```text
-.
 ├── decidon_scraping/
 │   ├── scripts/
 │   │   ├── deputies.py          # Scrape deputy records
