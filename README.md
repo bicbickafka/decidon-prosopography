@@ -36,23 +36,23 @@ Because individuals frequently held multiple offices, the same person may appear
 
 ### Database Schema
 
-The schema is made up of three tables: person, mandate and person_mandate (Figure 1). The person table stores biographical information: first and last name, alias, dates of birth and death, and source identifiers. The mandate table records institutional entities: the institution (Gouvernement, Chambre or Sénat), name,  start and end dates, and Wikipedia and Wikidata identifiers. The junction table person_mandate links individuals to these entities. It records the person's position, constituency, political party, tenure dates, and any additional roles (such as president or stenographer).
+The schema is made up of three tables: person, mandate and person_mandate (Figure 2). The person table stores biographical information: first and last name, alias, dates of birth and death, and source identifiers. The mandate table records institutional entities: the institution (Gouvernement, Chambre or Sénat), name,  start and end dates, and Wikipedia and Wikidata identifiers. The junction table person_mandate links individuals to these entities. It records the person's position, constituency, political party, tenure dates, and any additional roles (such as president or stenographer).
 
 <p align="center">
   <img src="docs/db_diagram.jpg" width="750" alt="db_diagram">
   <br>
   <em>
-    Figure 1. Schema.
+    Figure 2. Schema.
   </em>
 </p>
 
-As shown in Figure 2, the database consists of 5,792 individual office holders in the person table, 16,941 political appointments in person_mandate, and 149 institutional entities in mandate.
+As shown in Figure 3, the database consists of 5,792 individual office holders in the person table, 16,941 political appointments in person_mandate, and 149 institutional entities in mandate.
 
 <p align="center">
   <img src="docs/db_record_count.jpg" width="750" alt="db_record_count">
   <br>
   <em>
-    Figure 2. Record count.
+    Figure 3. Record count.
   </em>
 </p>
 
@@ -66,25 +66,23 @@ SQLite provides a lightweight, self-contained format that is straightforward to 
 
 The database supports Named Entity Linking (NEL) by querying extracted entity mentions from the Journal officiel and press corpora against database records. The search engine builds a Whoosh index over entity attributes including names, active mandate dates, offices, constituencies, and political affiliations.
 
-To optimize recall and precision, queries follow a tiered fallback strategy (Figure 1): attempting exact matching first, then falling back sequentially to boolean AND, strong token matching, and boolean OR whenever previous tiers return no candidates. Matches across all tiers are scored using BM25 and restricted by session or article date. 
+To optimize recall and precision, queries follow a tiered fallback strategy (Figure 4): attempting exact matching first, then falling back sequentially to boolean AND, strong token matching, and boolean OR whenever previous tiers return no candidates. Matches across all tiers are scored using BM25 and restricted by session or article date. 
 
 <p align="center">
   <img src="docs//nel_fallback_pipeline.jpg" width="900" alt="nel_fallback_pipeline.jpg">
   <br>
   <em>
-    Figure 1. Whoosh search query fallback pipeline with BM25 scoring.
+    Figure 4. Whoosh search query fallback pipeline with BM25 scoring.
   </em>
 </p>
 
-<br>
-
-Search results are aggregated at the person level (group_results_by_person) to resolve homonyms, title-only references, and overlapping concurrent mandates such as Léon Gambetta's simultaneous service as Minister of the Interior and Deputy in February 1871 (Figure 2). Once linked, mentions can be filtered and aggregated across individuals, mandates, institutions, or parties.
+Search results are aggregated at the person level (group_results_by_person) to resolve homonyms, title-only references, and overlapping concurrent mandates such as Léon Gambetta's simultaneous service as Minister of the Interior and Deputy in February 1871 (Figure 5). Once linked, mentions can be filtered and aggregated across individuals, mandates, institutions, or parties.
 
 <p align="center">
   <img src="docs/db_gambetta.jpg" width="900" alt="db_gambetta.jpg">
   <br>
   <em>
-    Figure 2. Relational records for Léon Gambetta during February 1871, illustrating overlapping mandates across government and parliamentary roles.
+    Figure 5. Relational records for Léon Gambetta during February 1871, illustrating overlapping mandates across government and parliamentary roles.
   </em>
 </p>
 
