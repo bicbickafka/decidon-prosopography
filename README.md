@@ -32,7 +32,7 @@ The three source-specific CSV files are combined into a common TSV file via `mer
 
 ### Database Creation
 
-Because individuals frequently held multiple offices, the same person may appear as a deputy in Sycomore, a senator in the Sénat lists, and a minister on Wikipedia. During database construction (executed via run_migration.py), records are consolidated using a deterministic person key. This key prioritizes the Wikidata QID where available, falling back sequentially to the Sénat identifier and the Sycomore identifier. Records without any of these identifiers are grouped using an exact combination of last name, first name, and birth date. Records with the same resulting key are represented by a single person entity.
+Because individuals frequently held multiple offices, the same person may appear as a deputy in Sycomore, a senator in the Sénat lists, and a minister on Wikipedia. During database construction (executed via `run_migration.py`), records are consolidated using a deterministic person key. This key prioritizes the Wikidata QID where available, falling back sequentially to the Sénat identifier and the Sycomore identifier. Records without any of these identifiers are grouped using an exact combination of last name, first name, and birth date. Records with the same resulting key are represented by a single person entity.
 
 ### Database Schema
 
