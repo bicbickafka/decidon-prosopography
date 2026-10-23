@@ -223,14 +223,23 @@ http://127.0.0.1:8000
 
 ### API Documentation
 
-Interactive API documentation is available through Swagger UI and ReDoc. Their URLs are configured in `decidon_app/main.py`.
+Once the application is running, interactive API documentation is available at:
 
-If the original documentation paths have been retained, they are:
+- [Swagger UI](http://127.0.0.1:8000/api/docs): explore endpoints, inspect parameters and response schemas, and execute requests.
+- [ReDoc](http://127.0.0.1:8000/api/redoc): browse endpoint and schema documentation.
 
-- Swagger UI: <http://127.0.0.1:8000/api/docs>
-- ReDoc: <http://127.0.0.1:8000/api/redoc>
+The OpenAPI specification is available at <http://127.0.0.1:8000/api/openapi.json>.
 
-See `decidon_app/routes.py` for the available endpoints and search parameters.
+#### Main Endpoints
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/persons` | Search biographical records by first and last name, with pagination |
+| `GET` | `/persons/grouped-mandates` | Search appointments grouped by person, with name, position, political-group, institutional-name, institution, and date filters |
+| `GET` | `/persons/{person_id}` | Retrieve a person’s biographical record and associated appointments |
+| `GET` | `/mandates` | List institutional entities, with optional institution and name filters |
+| `GET` | `/mandates/{mandate_id}/members` | Retrieve persons associated with an institutional entity |
+| `GET` | `/lookup` | Find persons by a substring of their first name, last name, or alias |
 
 ## 6. Whoosh Search Index
 
