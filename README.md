@@ -46,7 +46,7 @@ The schema is made up of three tables: `person`, `mandate` and `person_mandate` 
   </em>
 </p>
 
-As shown in Figure 3, the database consists of 5,792 individual office holders in the person table, 16,941 political appointments in person_mandate, and 149 institutional entities in mandate.
+As shown in Figure 3, the database consists of 5,792 individual office holders in the `person table`, 16,941 political appointments in `person_mandate`, and 149 institutional entities in `mandate`.
 
 <p align="center">
   <img src="docs/db_record_count.jpg" width="750" alt="db_record_count">
