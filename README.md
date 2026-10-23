@@ -6,47 +6,16 @@ The database was developed as part of DECIDON, a research project studying how P
 
 ## Contents
 
-- [Overview](#overview)
-- [Project structure](#project-structure)
-- [Installation](#installation)
-- [Database construction](#database-construction)
-- [Search application](#search-application)
-- [Data sources and processing](#data-sources-and-processing)
-- [Database schema](#database-schema)
-- [Named entity linking](#named-entity-linking)
-- [Scope and limitations](#scope-and-limitations)
+[Repository structure](#repository-structure)
+[Installation](#installation)
+[Database construction](#database-construction)
+[Search application](#search-application)
+[Data sources and processing](#data-sources-and-processing)
+[Database schema](#database-schema)
+[Named entity linking](#named-entity-linking)
+[Scope and limitations](#scope-and-limitations)
 
-## Overview
-
-The repository contains three main components:
-
-| Component | Purpose |
-|---|---|
-| `decidon_scraping` | Collect, merge, and validate source records |
-| `decidon_database` | Consolidate person records and construct the SQLite database |
-| `decidon_nel` | Provide API access and search tools for named entity linking |
-
-The database contains:
-
-| Table | Records |
-|---|---:|
-| `person` | 5,792 |
-| `person_mandate` | 16,941 |
-| `mandate` | 149 |
-
-These counts describe the database version documented here and may change after subsequent data updates.
-
-### Technical stack
-
-| Component | Technology |
-|---|---|
-| Data processing | Python |
-| Database | SQLite |
-| ORM | SQLAlchemy |
-| API | FastAPI and Pydantic |
-| Search index | Whoosh |
-
-## Project structure
+## Repository structure
 
 ```text
 .
