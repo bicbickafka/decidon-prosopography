@@ -2,7 +2,7 @@
 
 This repository contains the code used to scrape online records of deputies, senators, and ministers of the French Third Republic and build a SQLite database from them. It also includes a FastAPI search application and a Whoosh-based search index for retrieving records and supporting named entity linking.
 
-The database was developed as part of DECIDON, a research project studying how Parliament and the press shaped one another’s attention to policy issues—a process known as agenda-setting. Tracking how information circulates between Parliament and the press, requires structured records of political actors: who they were and, in particular, which positions they held when speaking or being spoken about.
+The database was developed as part of DECIDON, a research project studying how Parliament and the press shaped one another’s attention to policy issues—a process known as agenda-setting. Tracking how information circulates between Parliament and the press requires structured records of political actors: who they were and, in particular, which positions they held when speaking or being spoken about.
 
 ## Contents
 
