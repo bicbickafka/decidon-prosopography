@@ -45,7 +45,7 @@ The database was developed as part of DECIDON, a research project studying how P
 │   ├── index_gt.py
 │   ├── index_infer.py
 │   └── index_pre-traite.py
-├── docs/                       # Documentation figures
+├── docs/                        # Documentation figures
 ├── .gitignore
 ├── README.md
 └── requirements.txt
