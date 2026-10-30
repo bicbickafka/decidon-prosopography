@@ -12,7 +12,7 @@ The database was developed as part of DECIDON, a research project studying how P
 4. [Database Creation and Schema](#4-database-creation-and-schema)
 5. [FastAPI Search Application](#5-fastapi-search-application)
 6. [Whoosh Search Index](#6-whoosh-search-index)
-7. 
+   
 ## 1. Repository Structure
 
 ```text
