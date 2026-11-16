@@ -1,4 +1,4 @@
-# DECIDON: DEbats, CIrculation, DONnées
+# DECIDON: _DEbats, CIrculation, DONnées_
 
 This repository contains the code used to scrape online records of deputies, senators, and ministers of the French Third Republic and build a SQLite database from them. It also includes a FastAPI search application and a Whoosh-based search index for retrieving records and supporting named entity linking.
 
